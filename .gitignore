@@ -24,7 +24,7 @@
 *.out
 *.pdfsync
 *.ps
-*.wirecom.pdf
+wirecom.pdf
 *.snm
 *.synctex.gz
 *.toc
