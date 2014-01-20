@@ -1,0 +1,55 @@
+\documentclass{scrartcl}
+\usepackage{etex}
+\include{header/zusammenfassung}
+\include{header/hyperref}
+\include{header/listings}
+\usepackage{tikz}
+\usepackage{adjustbox}
+\usetikzlibrary{arrows}
+\usetikzlibrary{calc}
+\usetikzlibrary{matrix}
+\usetikzlibrary{intersections}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\usepackage{circuitikz}
+\usepackage{esdiff}
+
+\tikzstyle{3x3mask}=[
+	matrix of nodes, 
+	nodes={draw, minimum size=8mm, anchor=center},
+	column sep=0mm
+]
+
+
+% Spaltenabstand bei ,ulticols
+\setlength{\columnsep}{1.5em}
+
+\title{WireCom Zusammenfassung}
+\subtitle{Dozent: Prof.Dr. M.Rupf, Wireless Communicaton}
+\author{Ch. Winterhalter, S. Malacarne}
+
+\begin{document}
+\selectlanguage{ngerman}
+
+\lstset{language=Matlab}
+
+\maketitle
+\newpage
+
+\tableofcontents
+\newpage
+
+
+\setcounter{section}{0}
+
+\input{sections/radioPropagation}
+\input{sections/modulationMultipleAccess}
+\input{sections/informationTheoretical}
+\input{sections/rfidbluetoothBR}
+\input{sections/kap4}
+\input{sections/linalg}
+\input{sections/linalg}
+
+
+\end{document}
