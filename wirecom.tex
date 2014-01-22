@@ -1,4 +1,4 @@
-\documentclass{scrartcl}
+\documentclass[10pt,a4paper,fleqn]{scrartcl}
 \usepackage{etex}
 \include{header/zusammenfassung}
 \include{header/hyperref}
@@ -10,10 +10,48 @@
 \usetikzlibrary{matrix}
 \usetikzlibrary{intersections}
 
-\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+%%%%%%%%%%%%%%%%%%%%
+% Generelle Makros %
+%%%%%%%%%%%%%%%%%%%%
+\newcommand{\verweis}[2]{\small{(siehe auch \ref{#1}, #2 (S. \pageref{#1}))}}
+\newcommand{\verweiskurz}[1]{(\small{siehe \ref{#1}\normalsize)}}
+\newcommand{\subsubadd}[1]{\textcolor{black}{\mbox{#1}}}
+\newcommand{\formelbuch}[1]{$_{\textcolor{red}{\mbox{\small{S#1}}}}$}
+
+\newcommand{\kuchling}[1]{$_{\textcolor{red}{\mbox{\small{Kuchling #1}}}}$}
+\newcommand{\stoecker}[1]{$_{\textcolor{orange}{\mbox{\small{Stöcker #1}}}}$}
+\newcommand{\sachs}[1]{$_{\textcolor{blue}{\mbox{\small{Sachs S. #1}}}}$}
+\newcommand{\hartl}[1]{$_{\textcolor{green}{\mbox{\small{Hartl S. #1}}}}$}
+
+\newcommand{\schaum}[1]{\tiny Schaum S. #1}
+
+\newcommand{\skriptsection}[2]{\section{#1 {\tiny Skript S. #2}}}
+\newcommand{\skriptsubsection}[2]{\subsection{#1 {\tiny Skript S. #2}}}
+\newcommand{\skriptsubsubsection}[2]{\subsubsection{#1 {\tiny Skript S. #2}}}
+
+\newcommand{\matlab}[1]{\footnotesize{(Matlab: \texttt{#1})}\normalsize{}}
+
+
+\newenvironment{liste}[0]{
+	\begin{list}{$\bullet$}{\setlength{\itemsep}{0cm}\setlength{\parsep}{0cm} \setlength{\topsep}{0cm}}}
+    {\end{list}}
+\newenvironment{aufzaehlung}[0]{
+	\begin{enumerate}{\setlength{\itemsep}{0cm}\setlength{\parsep}{0cm}
+	\setlength{\topsep}{0cm}}} {\end{enumerate}}    
+
+\newcommand{\abbHeight}[3]{
+	\begin{center}
+		\includegraphics[height=#2]{./bilder/#1} \\
+		#3
+    \end{center}
+}
 
 \usepackage{circuitikz}
 \usepackage{esdiff}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel,varioref}
+\usepackage[left=1cm,right=1cm,top=1cm,bottom=1cm,includeheadfoot]{geometry}
+
 
 \tikzstyle{3x3mask}=[
 	matrix of nodes, 
@@ -21,16 +59,22 @@
 	column sep=0mm
 ]
 
+% Zeilenhöhe Tabellen:
+\newcommand{\arraystretchOriginal}{1.5}
+\renewcommand{\arraystretch}{\arraystretchOriginal}
+
+\setlength{\parindent}{0pt}
 
 % Spaltenabstand bei ,ulticols
-\setlength{\columnsep}{1.5em}
+%\setlength{\columnsep}{1.5em}
 
 \title{WireCom Zusammenfassung}
 \subtitle{Dozent: Prof.Dr. M.Rupf, Wireless Communicaton}
 \author{Ch. Winterhalter, S. Malacarne}
 
 \begin{document}
-\selectlanguage{ngerman}
+
+
 
 \lstset{language=Matlab}
 
@@ -43,6 +87,7 @@
 
 \setcounter{section}{0}
 
+%\input{sections/logDarstellung}
 \input{sections/radioPropagation}
 \input{sections/modulationMultipleAccess}
 \input{sections/informationTheoretical}
