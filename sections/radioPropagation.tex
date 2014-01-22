@@ -118,3 +118,64 @@ Minimum required Rx Power
 \begin{equation*}
 	P_r [dBm] \geq \underbrace{-174[dBm]}_{\text{nois floor}} + 10 \cdot log_{10}(B [Hz]) + \underbrace{F_{tot}[dB]}_{\text{Rx noise figure}} + SNR_{min}
 \end{equation*}
+
+\subsection{Das zelluläre Konzept \formelbuch{235}}
+	\begin{minipage}{12cm}
+		Gesamte Fläche bspw. eines Landes wird in \textbf{sechseckige Flächen} - sogenannte \textbf{Zellen} - aufgeteilt. 
+		Eine \textbf{Gruppe} von Zellen - ein sog. \textbf{Cluster} - enthält nur Zellen mit unterschiedlichen Frequenzen.
+		Die Anzahl Zellen pro Cluster $N$ ist durch folgende Formel beschränkt:
+		\begin{center}
+	        $ N=i^2+j^2+ij = \left\{1,3,4,7,9,12,13,16,19,\ldots\right\}, \quad \text{mit } i,j \in
+	        \{0,1,2,3,\ldots \} $ \\ $ D = \sqrt{3N} R \qquad q = \frac{D}{R} =
+	        \sqrt{3N} $
+        \end{center}
+	\end{minipage}
+	\begin{minipage}{8cm}
+	    \includegraphics[width=7cm]{./bilder/systems-cluster.png}
+	\end{minipage}
+
+\subsubsection{Cochannel Interference $C/I$ \formelbuch{238}}
+    \begin{minipage}{12.5cm}
+        Interferenz von nächster Zelle mit gleicher Frequenz wird als Cochannel Interferenz $C/I$ angegeben.
+        $$ C/I_{\text{lin}} = \frac{r^{-4}}{6d^{-4}} = \frac32 N^2 \qquad \Rightarrow \qquad 
+        C/I_{\text{dB}} = 1.76 + 20 \logd N $$
+        \begin{center}
+            \includegraphics[width=3cm]{./bilder/systems-ci.png}                
+        \end{center}
+    \end{minipage}
+    \begin{minipage}{6.5cm}
+        \includegraphics[width=6.5cm]{./bilder/systems-gsm-CItable.png}    
+    \end{minipage}
+
+\subsubsection{Sektorisierung \formelbuch{239}}
+	Durch Sektorisierung wird die $C/I$ wird um \textbf{Faktor 3 gesteigtert}. Die Antenne wird im Zentrum der Zelle
+	aufgestellt und deckt 1/3 der Zelle ab. \textcolor{green}{Vorteile:} $C/I$ verbessert $\Rightarrow$ Clustergrösse kann reduziert werden;
+	\textcolor{red}{Nachteile:} Zusätzlicher Hardwareaufwand (Richtantennen, \ldots), Mehr Frequenzen benötigt, Mehr Signalisierung wegen häufigerem Kanalwechsel.
+
+\subsection{Bündelung / Erlang (Trunking)  \formelbuch{240}}
+    \begin{minipage}{12cm}
+    Nebst der Einteilung in verschiedene Kanäle (FDMA) werden die Benutzer in Zeitschlitze (TDMA) gebündelt,
+    um eine grössere Kapazität zu erreichen. \\
+    Der Datenverkehr in Mobilfunknetzen wird in \textbf{Erlang} gemessen:
+    \begin{liste}
+        \item 1 Erlang $\Rightarrow$ 1 Benutzer telefoniert 100\% der Zeit
+        \item 2 mE $\Rightarrow$ 1 Benutzer telefoniert 0.2 \% der Zeit
+    \end{liste} 
+    \vspace{0.2cm}
+    Die Wahrscheinlichkeit, dass ein Benutzer blockiert wird und das Telefonat nicht ausführen kann ist gegeben durch
+    \text{P(blocking)}:        
+        \begin{minipage}{6cm}
+            $$   \text{P(blocking)} = \frac{\frac{A^C}{C!}}{\sum_{k=0}^C\frac{A^k}{k!}} , $$            
+        \end{minipage}
+        \begin{minipage}{4.5cm}
+            $A$: Traffic intensity, $[A] = E$ \\        
+            $C$: Anzahl Kanäle, $[C] = 1$           
+        \end{minipage}       
+    Die nebenstehende Grafik zeigt die Blockierungswahrscheinlickeit abhängig von der Traffic Intensity und der Anzahl Kanäle. 
+    \end{minipage}
+    \begin{minipage}{0.3cm}
+        \quad
+    \end{minipage}
+    \begin{minipage}{7cm}    
+        \includegraphics[width=7cm]{./bilder/systems-erlangB-graph.png}
+    \end{minipage}
