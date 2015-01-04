@@ -17,13 +17,13 @@
 
 \subsection{Path Loss Model 'Exponent n'}
 
-\begin{equation*}
+\begin{equation}
 	PL_{path}(d) = \underbrace{PL_{fs}(d_0)}_{\textbf{Free space Loss @ $d_0$}} + 10 \cdot n \cdot log_{10}(\frac{d [m]}{d_0 [m]})
-\end{equation*}
+\end{equation}
 
-\begin{equation*}
+\begin{equation}
 	PL_{fs}(d_0) = 10\cdot log_{10}((\frac{4\pi d_0}{\lambda})^2)
-\end{equation*}
+\end{equation}
 
 \begin{table}[!htp]
 \begin{subtable}[c]{0.6\textwidth}
@@ -63,17 +63,17 @@ The Hata model for mobile radio is valid under the following constraints:\\ \\
 \end{tabular} \\ \\
 
 General Form:
-\begin{equation*}
+\begin{equation}
 	PL_{50}[dB] = A + 10 \cdot n \cdot log_{10}(d[km])
-\end{equation*}
+\end{equation}
 
 Median value of the attenuation:
-\begin{equation*}
+\begin{equation}
 	PL_{50}[dB] = \underbrace{ 46.3  33.9 \cdot log(f_c [MHz]) - 13.82 \cot log_{10}(h_t [m]) -a(h_r  [m])}_{A} +  \underbrace{(44.9 -6.55 \cdot log_{10}(h_t [m]))}_{10 \cdot n} \cdot log_{10}(d [km]))
-\end{equation*}
-\begin{equation*}
+\end{equation}
+\begin{equation}
 	a(h_r) = (1.1 \cdot log_{10}(f_c) - 0.7) \cdot h_r- (1.56 \cdot log_{f_c} - 0.8)
-\end{equation*}
+\end{equation}
 
 \textbf{If height of the tx antenna $h_t = 30\;m$ then is $n=3.5$. The result rate is then $\frac{35\;dB}{Dekade}$}
 
@@ -91,21 +91,21 @@ The Okumura Hata model for mobile radio is valid under the following constraints
 \end{tabular} \\ \\
 
 Urban Path Loss:
-\begin{equation*}
+\begin{equation}
 	PL_{50,Urban}[dB] =  69.55 + 26.16 \cdot log_{10}(f [MHz])- 13.82 \cdot log_{10}(h_t [m]) - C+ (44.9 -6.55 \cdot log_{10}(h_t[m])) \cdot log_{10}(d[km]))
-\end{equation*}
+\end{equation}
 
 Correction factor C:\\ \\
 \begin{tabular}{ll}
-medium/small cities: & $C = (1.1 \cdot log_{10}(f [MHz])-0.7) \cdot h_r -1.56 \cdot log_{10}(f [MHz]) + 0.8 \quad \approx 0 \text{ if } h_r = 1.5m$ \\ 
+medium/small cities: & $C = (1.1 \cdot log_{10}(f [MHz])-0.7) \cdot h_r -1.56 \cdot log_{10}(f [MHz]) + 0.8 \quad \text{ ~ } 0 \text{ if } h_r = 1.5m$ \\ 
 suburban: & $C = 2 \cdot (log_{10}(\frac{f[MHz]}{28}))^2 + 5.4$ \\ 
 \end{tabular} 
 
 \subsection{Link Budget}
 Received Power:
-\begin{equation*}
-	P_r [dBm] = \underbrace{P_t [dBm] - L_t [dBm] + G_t[dBi]}_{\text{EIRP [dB]}} - PL_{path}[dB] + G_r[dBi] -L_r[dB]
-\end{equation*}
+\begin{equation}
+	P_r [dBm] = \underbrace{P_t [dBm] - L_t [dBm] + G_t[dBi]}_{ \text{EIRP [dB]} } - PL_{path}[dB] + G_r[dBi] -L_r[dB]
+\end{equation}
 
 \begin{tabular}{ll}
 \textbf{Parameter} & \textbf{acceptation} \\ \hline
@@ -115,9 +115,9 @@ $EIRP$ & often limited by regulation \\
 \end{tabular} \\ \\
 
 Minimum required Rx Power
-\begin{equation*}
-	P_r [dBm] \geq \underbrace{-174[dBm]}_{\text{nois floor}} + 10 \cdot log_{10}(B [Hz]) + \underbrace{F_{tot}[dB]}_{\text{Rx noise figure}} + SNR_{min} + Margin_{\text{Fading}}
-\end{equation*}
+\begin{equation}
+	P_r [dBm] \geq \underbrace{-174[dBm]}_{ \text{noise floor} } + 10 \cdot log_{10}(B [Hz]) + \underbrace{F_{tot}[dB]}_{ \text{Rx noise figure} } + SNR_{min} + Margin_{ \text{Fading} }
+\end{equation}
 
 \subsection{Das zelluläre Konzept \formelbuch{235}}
 	\begin{minipage}{12cm}
