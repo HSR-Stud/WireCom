@@ -107,7 +107,10 @@ ermöglicht es gegenüber Einträgerverfahren, viel weniger Bandbreite zu nutzen
 Problem der \textbf{Multidimensional Interference (MDI)}:
 \begin{liste}
     \item \textbf{Intersymbolic Interference (ISI)} \\
-            Symbole überlappen sich im Zeitbereich (wegen Faltung mit Impulsantwort des Kanals - Laufzeit, Echo, usw.)
+            Symbole überlappen sich im Zeitbereich (wegen Faltung mit Impulsantwort des Kanals - Laufzeit, Echo, usw.). 
+			Um dies zu vermeiden wird in der Regel ein Guard Intervall $T_{Guard}$ zwischen den Symbolen eingefügt. 
+			Wenn ein ISI verhindert werden soll, dann darf der Unterschied zwischen dem LOS-Ausbreitungspfad und einem 
+			Nicht-LOS-Ausbreitungspfad maximal $D_{max} = c\cdot T_{Guard}$ sein.
     \item \textbf{Inter Channel Interference (ICI)} \\
             Subcarrier sind nicht mehr orthogonal. \\
 \end{liste}
