@@ -51,6 +51,11 @@
 		\item Downlink: ASK Modulation, Nicht zu viele Nullen senden, sonst hat Tag zu wenig Power. Je höher Modulationstiefe, umso weniger Energie. 
 		\item Uplink: Lastmodulation, Manchester coded, Tag schliesst Antenne kurz, wird auf Hauptträger draufmoduliert (mit Subträger)
 	\end{itemize}
+	
+	\begin{minipage}{12cm}
+		\includegraphics[width=12cm]{./bilder/rfid-spectrum.png} 
+	\end{minipage}
+	
 \subsubsection{Standards}
 	\begin{itemize}
 		\item LF
@@ -109,6 +114,7 @@
 		\item Downlink: ASK Modulation, Nicht zu viele Nullen senden, sonst hat Tag zu wenig Power. Je höher Modulationstiefe, umso weniger Energie. 
 		\item Uplink: Backscatter Modulation, Tag schliesst Antenne kurz, wird auf Hauptträger draufmoduliert (mit Miller-Modulierter Subträger)
 	\end{itemize}
+
 	
 \subsection{NFC - Near Field Communication}
 	
@@ -118,6 +124,10 @@
 			
 	NFC wird heute häufig als Synonym für RFID verwendet. NFC ist aber ein \textbf{Standard} welcher physikalisch ein RFID-Interface benutzt. 
 	NFC ist beides = Auf der physikalischen Ebene RFID und auf protokol Ebene etwas Spezielles.
-	
+	\begin{itemize}
+		\item Active Mode - Peer-to-Peer mode, ASK-modulation in both directions, max. 424 kb/s, range up to 20cm
+		\item Passive Mode - Reader Emulation, ISO 14443 and 15693 Tags can be read
+		\item Passive Mode - Card Emulation, market driver (wallet-app)
+	\end{itemize}
 	
 	
