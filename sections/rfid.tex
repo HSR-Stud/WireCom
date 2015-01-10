@@ -1,5 +1,5 @@
 
-\section{RFID Intro}
+\section{RFID}
 \begin{tabular}[h]{c c}
 
 \parbox{6cm}{
@@ -11,27 +11,47 @@
 \end{tabular}
 \subsection{Aktiv vs. Passiv}
 	\begin{itemize}
-		\item Passiv: Ich sende und empfange gleichzeitig, Frequenzen müssen leicht verschoben sein
-		\item Semi-Passiv: Ich kann NICHT antowrten, wenn ich angestrahlt werden. Ich habe Batterie für Tag Power. 
-		\item Aktiv: Ich kann antworten auch wenn ich nicht angestrahlt werde. ich habe Batterie für Tag und Radio. 
+		\item Passiv: Es sendet und empfängt gleichzeitig, Frequenzen müssen leicht verschoben sein
+		\item Semi-Passiv: Es kann nur antworten, wenn es angestrahlt wird. Es hat Batterie für Tag Power aber nicht für Radioteil. 
+		\item Aktiv: Es kann antworten auch wenn es nicht angestrahlt wird. Es hat Batterie für Tag und Radio. 
 	\end{itemize}
 \subsection{Antikollisionsprotokolle}
 	\begin{itemize}
-		 \item Deterministisches Antikollisionsprotokoll: Baumsuche anhand von ID (und Maske). Leserate: 10-30 Tags/s
-		 \item Probabilistisches Antikollisionsprotokoll: Modifiziertes Aloha Protokoll (mit Random Nr). Leserate. 100-500 Tags/s
+		 \item Deterministisches Antikollisionsprotokoll: Baumsuche anhand von uniqueID (und Maske). Leserate: 10-30 Tags/s
+		 \item Probabilistisches Antikollisionsprotokoll: Modifiziertes ALOHA-Protokoll (mit Random Nr). Leserate. 100-500 Tags/s
 	\end{itemize}
-\section{RFID HF}
+	Tags sollten einen gewissen Abstand voneinander haben um zu vermeiden dass sie sich gegenseitig stören (Schwingkreisverstimmung).
+
+\subsection{RFID LF}
 	\begin{itemize}
-		\item Hohe Frequenz $\rightarrow$ 3-10 Windungen
+		\item Frequenz: Um 125-134kHz
+		\item Induktive Kopplung (Spulen als Empfänger) - inductive near-field coupling
 		\item Tiefe Frequenz $\rightarrow$ 100-1000 Windungen
-		\item Spulengrösse $\rightarrow$ Leseabstand = Spulendurchmesser
+		\item Flüssigkeiten haben nur einen geringen, Metalle haben einen grossen Störeinfluss
+		\item Downlink ASK
+		\item Uplink Load Modulation (durch kurzschliessen der Tag-Antenne wird ein Gegenfeld erzeugt welches das Feld des Readers schwächt.
+		\item Collision ALOHA
+		\item Typische Anwendung: Tier-Identifikation
 	\end{itemize}
-\subsection{Modulation}
+	
+\subsection{RFID HF}
 	\begin{itemize}
-		\item Reader -> Tag: ASK Modulation, Nicht zu viele Nullen senden, sonst hat Tag zu wenig Power. Je höher Modulationstiefe, umso weniger Energie. 
-		\item Tag -> Reader: Lastmodulation, Manchester coded, Tag schliesst Antenne kurz, wird auf Hauptträger draufmoduliert (mit Subträger)
+		\item Frequenz: 5MHz - 100MHz
+		\item Typischerweise 13.56MHz (90% aller RFID Applikationen arbeiten mit dieser Frequenz)
+		\item Induktive Kopplung (Spulen als Empfänger) - inductive near-field coupling
+		\item Downlink ASK
+		\item Uplink Load Modulation
+		\item Collision ALOHA
+		\item Reader Talks first
+		\item Hohe Frequenz $\rightarrow$ 3-10 Windungen
+		\item Spulengrösse $\rightarrow$ Leseabstand = Spulendurchmesser von Reader Antenne
 	\end{itemize}
-\subsection{Standards}
+\subsubsection{Modulation}
+	\begin{itemize}
+		\item Downlink: ASK Modulation, Nicht zu viele Nullen senden, sonst hat Tag zu wenig Power. Je höher Modulationstiefe, umso weniger Energie. 
+		\item Uplink: Lastmodulation, Manchester coded, Tag schliesst Antenne kurz, wird auf Hauptträger draufmoduliert (mit Subträger)
+	\end{itemize}
+\subsubsection{Standards}
 	\begin{itemize}
 		\item LF
 			\begin{itemize}
@@ -39,14 +59,65 @@
 			\end{itemize} 
 		\item HF
 			\begin{itemize}
-				\item ISO/IEC 14443
-				Identification Cards – Proximity Cards (2001) range up to 10 cm, data rate 106 kb/s
-				\item SO/IEC 15693
-				Identification Cards– Vicinity Cards (2001), range up to 1m, data rate 26kb/s, ISO/IEC 18000 - 3 mode1, 20Tags/s
-				\item ISO/IEC 18000-3 mode 3(item management standard), HF-version of EPC UHF Gen2, high data and high reading rates, 300Tags/s
-				
-				
-				
+				\item ISO/IEC 14443	Identification Cards – Proximity Cards (2001) 
+					\begin{itemize}
+						\item 2 completely different data transmission types (A and B), incompatible (Reader must support both)
+						\item range up to 10 cm, data rate 106 kb/s, 13.56 MHz, inductive coupling
+						\item typical application: e-ticketing, micro-payment (e.g. Metro-tickets)
+					\end{itemize}
+				\item ISO/IEC 15693	Identification Cards – Vicinity Cards (2001/2009)
+					\begin{itemize}
+						\item range up to 1m, data rate 26 kb/s, ISO/IEC 18000-3 mode 1, 13.56 MHz, inductive coupling
+						\item Moving tag reading rate: 125 Tags/s (max. 1 Tag in Reader field), otherwise 10-20 Tags/s
+						\item Memory: max. 8kByte (either 256 blocks x 256 bits or 2048 blocks x 32 bits with protocol extension)
+						\item typical application: Access, Ski-Pass, item management
+					\end{itemize}
+				\item ISO/IEC 18000-3 mode 3(item management standard)
+					\begin{itemize}
+						\item range up to 1m, less used HF-version of EPC UHF Gen2, typically 53 kb/s (ETSI), 13.56 MHz, inductive coupling
+						\item slotted ALOHA based anticollision algorithm allows up to 150 Tags/s
+					\end{itemize}
+						
+			\end{itemize}
+		\item UHF
+			\begin{itemize}
+				\item ISO/IEC 18000-6C item management standard - EPC Gen2 UHF
+					\begin{itemize}
+						\item Tags can be used worldwide in the 860-960 MHz band, radio coupling
+						\item range up to 16m, datarate ETSI 100kb/s (FCC: 200kb/s)
+						\item slotted ALOHA based anticollision algorithm allows up to 400 Tags/s
+					\end{itemize}
+			\end{itemize}
+		\item NFC-Interface and Protocol Standards
+			\begin{itemize}
+				\item NFCIP-2 (ECMA-352 / ISO-21481) 
+				\item NFCIP-1 (ECMA-340 / ISO-18092) 
 			\end{itemize}
 	\end{itemize}
-\section{RFID UHF}
+\subsection{RFID UHF}
+	\begin{itemize}
+		\item Frequenz:	100 MHz - 10 GHz
+		\item Typische Frequenzen sind 860-960 MHz oder 2.4GHz
+		\item Elektromagnetische Kopplung (Antenne zum Empfangen) - electromagnetic far-field coupling
+		\item Flüssigkeiten absorbieren die Strahlung und Metall hat einen grossen Einfluss
+		\item Leseabstand bei passiven Tags bis zu 5-8 m (semi-passive bis 15m, aktive bis 100m)
+		
+	\end{itemize}
+
+\subsubsection{Modulation}
+	\begin{itemize}
+		\item Downlink: ASK Modulation, Nicht zu viele Nullen senden, sonst hat Tag zu wenig Power. Je höher Modulationstiefe, umso weniger Energie. 
+		\item Uplink: Backscatter Modulation, Tag schliesst Antenne kurz, wird auf Hauptträger draufmoduliert (mit Miller-Modulierter Subträger)
+	\end{itemize}
+	
+\subsection{NFC - Near Field Communication}
+	
+	\begin{minipage}{10cm}
+		\includegraphics[width=10cm]{./bilder/rfid-nfc.png} 
+	\end{minipage}
+			
+	NFC wird heute häufig als Synonym für RFID verwendet. NFC ist aber ein \textbf{Standard} welcher physikalisch ein RFID-Interface benutzt. 
+	NFC ist beides = Auf der physikalischen Ebene RFID und auf protokol Ebene etwas Spezielles.
+	
+	
+	
