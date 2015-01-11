@@ -6,12 +6,12 @@ Tag $\rightarrow$ Reader: Uplink
 
 \begin{tabular}[h]{c c}
 
-\parbox{8cm}{
-    \includegraphics[width=8cm]{./bilder/RFIDFrequenzen.png} } 
+\parbox{9cm}{
+    \includegraphics[width=9cm]{./bilder/RFIDFrequenzen.png} } 
 &
 
-\parbox{8cm}{
-    \includegraphics[width=8cm]{./bilder/RFIDTags.png} } \\
+\parbox{9cm}{
+    \includegraphics[width=9cm]{./bilder/RFIDTags.png} } \\
 \end{tabular}
 \subsection{Aktiv vs. Passiv}
 	\begin{itemize}
@@ -33,7 +33,26 @@ Tag $\rightarrow$ Reader: Uplink
 		}
 	\end{tabular}
 	
-	Tags sollten einen gewissen Abstand voneinander haben um zu vermeiden dass sie sich gegenseitig stören (Schwingkreisverstimmung).
+	Generell sollten Tags einen gewissen Abstand voneinander haben um zu vermeiden dass sie sich gegenseitig stören (Schwingkreisverstimmung).
+
+\subsubsection{Slotted ALOHA}
+\label{sec:slotted-aloha}
+	Every Tag sends its data packet in a randomly chosen time slot. If multiple Tags send in the same slot, there is a collision and the Tags
+	recognize it by the missing acknowledge. The throughput is $\frac{1}{e} = 37\%$ of the maximum capacity of the channel.
+	
+	\begin{tabular}{ll}
+		\parbox{10cm}{
+			With EPC Gen2 there is an additional Q-parameter which is used to dynamically control the frame length (i.e. number of slots). 
+			There is an inventory-round at the beginning with max. $2^Q$ slots. The Tags choose randomly a slot number between $0 ... 2^Q-1$ and 
+			reply with their 16-bit random number (RN16). If just 1 Tag answers in a slot, the Reader sends back the ACK with the Tags RN16, 
+			whereon the Tag sends its EPC back. If no Tag (idle) or $>1$ Tags (collision) answer in a slot, then the Reader goes to the next 
+			slot to 'unblock' the medium and starts with the next inventory-round.
+			The Q-parameter (i.e. frame length) is chosen to maximize success-rate $\rightarrow$ Frame length = Number of unidentified Tags (has to be estimated).
+		}	
+		& \parbox{8cm}{
+			\fbox{ \includegraphics[width=8cm]{./bilder/rfid-q-parameter.png}}\\ Q-algorithm
+		}
+	\end{tabular}
 
 \subsection{Standards}
 	\begin{itemize}
@@ -53,8 +72,8 @@ Tag $\rightarrow$ Reader: Uplink
 					\begin{itemize}
 						\item range up to 1m, data rate 26 kb/s, ISO/IEC 18000-3 mode 1, 13.56 MHz, inductive coupling
 						\item Moving tag reading rate: 125 Tags/s (max. 1 Tag in Reader field), otherwise 10-30 Tags/s
+						\item Deterministic anticollision-protocol (based on uniqueID and mask)
 						\item Minimum exposure time in Reader field access approx. 8 ms
-						\item Deterministic anticollision-protocol (anhand von uniqueID und Maske)
 						\item Memory: max. 8kByte (either 256 blocks x 256 bits or 2048 blocks x 32 bits with protocol extension)
 						\item Tags are uniquely identified by a 64 bits unique identifier (UID)
 						\item typical application: Access, Ski-Pass, item management
@@ -116,7 +135,9 @@ Tag $\rightarrow$ Reader: Uplink
 	\end{itemize}
 	
 	\begin{minipage}{12cm}
-		\includegraphics[width=12cm]{./bilder/rfid-spectrum.png} 
+		\begin{center}
+			\includegraphics[width=12cm]{./bilder/rfid-spectrum.png} 
+		\end{center}
 	\end{minipage}
 	
 	Beim Design induktiver Reader- und Tag-Antennen wird die Güte Q so gewählt, dass sich ein Kompromiss zwischen lange Distanz (hohe Spannungsspitzen) 
@@ -129,8 +150,7 @@ Tag $\rightarrow$ Reader: Uplink
 		\item Typische Frequenzen sind 860-960 MHz oder 2.4GHz
 		\item Elektromagnetische Kopplung (Antenne zum Empfangen) - electromagnetic far-field coupling
 		\item Flüssigkeiten absorbieren die Strahlung und Metall hat einen grossen Einfluss
-		\item Leseabstand bei passiven Tags bis zu 5-8 m (semi-passive bis 15m, aktive bis 100m)
-		
+		\item Leseabstand bei passiven Tags bis zu 5-8 m (semi-passive bis 15m, aktive bis 100m)		
 	\end{itemize}
 
 \subsubsection{Modulation bei elektromagnetischer Kopplung}
@@ -140,8 +160,20 @@ Tag $\rightarrow$ Reader: Uplink
 	\end{itemize}
 
 	\begin{minipage}{12cm}
-		\includegraphics[width=12cm]{./bilder/rfid-millermod.png} 
+		\begin{center}
+			\includegraphics[width=12cm]{./bilder/rfid-millermod.png} 
+		\end{center}
 	\end{minipage}
+	
+\subsubsection{EPC Gen2}
+	EPC Gen2 is used with RFID-HF as well as with RFID-UHF, but due to the higher range more commonly in UHF.
+	As mentioned in chapter \ref{sec:slotted-aloha}, EPC Gen2 is using a slightly modified version of the slotted ALOHA algorithm.
+	There are 4 sessions allowing multiple Readers to conduct independent inventories. EPC Gen2 Tags have an inventory flag per session
+	with state \textbf{A} and \textbf{B}. Tags participate in only one session during an inventory round and after being identified they 
+	invert the state (e.g. from A to B). The 4 inventory (session) flags have different persistence (i.e. time Tag stays in 'B' before
+	reverting back to 'A').
+	
+	Kill command allows an Interrogator to permanently disable a Tag.
 	
 \subsection{NFC - Near Field Communication}
 	
