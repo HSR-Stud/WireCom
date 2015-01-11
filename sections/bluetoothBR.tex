@@ -90,8 +90,7 @@
 			The connection procedure can last 5-10s.
 		}	
 		& \parbox{4cm}{
-			\fbox{ \includegraphics[width=4cm]{./bilder/bt-piconet.png}} 
-		}
+			\fbox{ \includegraphics[width=4cm]{./bilder/bt-piconet.png}} \\ Piconet and Scatternet }
 	\end{tabular}
 
 \subsection{AFH - Adaptive Frequency Hopping}
@@ -103,11 +102,14 @@
 	
 	AFH is used to improve resistance to radio frequency interference by avoiding the use of crowded frequencies
 	(e.g. used by WLANs) in the hopping sequence.
-	
+
 \subsection{Packet transmission}
 	In an EDR-packet there is a small guard time and synchronization sequence before payload. This is 
 	a field used for physical layer change of modulation scheme (GFSK for the packet header and 4- or 8-PSK 
 	for the payload). The packet header is GFSK-modulated in order that all Bluetooth devices can decode it.
+	
+	During the transmission of a multi-slot packet (e.g. 3 slots) the frequency f(k) of the master doesn't hop. When 
+	the transmission is terminated, the frequency of the master hops to the next slot (e.g. f(k+3)).
 	
 	\begin{minipage}{16cm}
 		\includegraphics[width=16cm]{./bilder/bt-packet-transmission.png} 
