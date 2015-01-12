@@ -47,7 +47,11 @@ Tag $\rightarrow$ Reader: Uplink
 			reply with their 16-bit random number (RN16). If just 1 Tag answers in a slot, the Reader sends back the ACK with the Tags RN16, 
 			whereon the Tag sends its EPC back. If no Tag (idle) or $>1$ Tags (collision) answer in a slot, then the Reader goes to the next 
 			slot to 'unblock' the medium and starts with the next inventory-round.
+			
 			The Q-parameter (i.e. frame length) is chosen to maximize success-rate $\rightarrow$ Frame length = Number of unidentified Tags (has to be estimated).
+			A possible update procedure for the Q-parameter could be \\
+			$Q\lbrack n+1\rbrack = round(log_2(2\cdot C\lbrack n\rbrack))$ where $C\lbrack n\rbrack$ represents the number of collision in the n-th 
+			inventory round.
 		}	
 		& \parbox{8cm}{
 			\fbox{ \includegraphics[width=8cm]{./bilder/rfid-q-parameter.png}}\\ Q-algorithm
@@ -105,12 +109,13 @@ Tag $\rightarrow$ Reader: Uplink
 \subsection{RFID LF}
 	\begin{itemize}
 		\item Frequenz: Um 125-134kHz
-		\item Induktive Kopplung (Spulen als Empfänger) - inductive near-field coupling 
+		\item Induktive Kopplung (Spulen als Empfänger) - inductive near-field coupling (-60dB/decade)
 		\item Tiefe Frequenz $\rightarrow$ 100-1000 Windungen
-		\item Flüssigkeiten haben nur einen geringen, Metalle haben einen grossen Störeinfluss
+		\item Flüssigkeiten haben nur einen winzigen, Metalle haben einen grossen Störeinfluss
 		\item Downlink: ASK Modulation
 		\item Uplink: Load Modulation (durch kurzschliessen der Tag-Antenne wird Gegenfeld erzeugt welches Feld des Readers schwächt)
 		\item Anticollision: ALOHA
+		\item Spulengrösse $\rightarrow$ Leseabstand = Spulendurchmesser von Reader Antenne
 		\item Typische Anwendung: Tier-Identifikation
 	\end{itemize}
 	
@@ -119,6 +124,7 @@ Tag $\rightarrow$ Reader: Uplink
 		\item Frequenz: 5MHz - 100MHz
 		\item Typischerweise 13.56MHz (90\% aller RFID Applikationen arbeiten mit dieser Frequenz)
 		\item Induktive Kopplung (Spulen als Empfänger) - inductive near-field coupling (-60dB/decade)
+		\item Flüssigkeiten haben nur einen geringen, Metalle haben einen grossen Störeinfluss
 		\item Downlink: ASK Modulation
 		\item Uplink: Load Modulation
 		\item Anticollision: ALOHA
@@ -174,6 +180,17 @@ Tag $\rightarrow$ Reader: Uplink
 	reverting back to 'A').
 	
 	Kill command allows an Interrogator to permanently disable a Tag.
+	
+	\begin{minipage}{14cm}
+		\begin{center}
+			\includegraphics[width=14cm]{./bilder/rfid-epc-msc.png} \\ Ex. Message Sequence Chart
+		\end{center}
+	\end{minipage}
+	
+	The advantage of this special telegram exchange is the short first reply of the Tag, which in case of collision means that the medium
+	is 'freed up' quickly again. Furthermore, there is a copy of the Tags RN16 in the ACK of the Reader which helps in capturing situation
+	(two Tags answering simultaneously with different signal strength).
+	
 	
 \subsection{NFC - Near Field Communication}
 	
