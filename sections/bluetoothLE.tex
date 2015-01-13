@@ -30,3 +30,25 @@
 				With BLE it is not possible to have scatternet anymore.
 			}	
 		\end{tabular}
+		
+	\subsection{Message Sequence Chart}
+		\begin{tabular}{ll}
+			\parbox{12cm}{
+				This is an example for a Message Sequence Chart between a Bluetooth LE advertiser and a Bluetooth LE initiator, assuming that 
+				\begin{itemize}
+					\item the advertising interval is 1s (and the random advertising delay can be neglected)  
+					\item the host of the initiator requests a connection at $t = 1.5$s with a connection interval of 1s  
+					\item the (adaptive) data channel hop sequence is 15, 32, 24, 17, 10, 5, 6, 11, 19, ...  
+					\item the first connection event starts 1s after the last advertising event started  
+					\item the slave latency is 3 (the slave answers to the first connection packet)  
+					\item master and slave send data packets with empty PDU if required and no data is available   
+					\item the host of the slave requests to send a notification with a newvalue at $t = 7.5$s 
+				\end{itemize}
+			}
+			& \parbox{6cm}{
+				\fbox{ \includegraphics[width=6cm]{./bilder/ble-msc.png}}
+			}	
+		\end{tabular}
+			
+			
+			

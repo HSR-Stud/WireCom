@@ -109,17 +109,40 @@
 	for the payload). The packet header is GFSK-modulated in order that all Bluetooth devices can decode it.
 	
 	During the transmission of a multi-slot packet (e.g. 3 slots) the frequency f(k) of the master doesn't hop. When 
-	the transmission is terminated, the frequency of the master hops to the next slot (e.g. f(k+3)).
+	the transmission is terminated, the frequency of the master hops to the next slot (e.g. f(k+3)). If there is a  
+	collision in a slot during the transmission of a multi-slot packet, then the whole packet is destroyed. \\
+	
+	Bluetooth knows the following types of logical links:
+	\begin{itemize}
+		\item Synchronous Connection-Oriented \textbf{(SCO)} logical transport, point-to-point logical transport,  
+		where there is no repetition of lost packets, but there are reserved slots at regular intervals 
+		for maintaining the synchronous transport (e.g. for voice). 
+		\item Extended Synchronous Connection-Oriented \textbf{(eSCO)} logical transport, where a repetition is possible 
+		within a certain retransmission window right after the reserved slots.
+		\item Asynchronous Connection-Oriented \textbf{(ACL)} logical transport, 
+		\item Active Slave Broadcast \textbf{(ASB)} logical transport, used by master to communicate with active slaves
+		\item Parked Slave Broadcast \textbf{(PSB)} logical transport, used by master to communicate with parked slaves
+	\end{itemize}
+	
+	\begin{tabular}{ll}
+		\parbox{9cm}{
+			\fbox{ \includegraphics[width=8.5cm]{./bilder/bt-acl.png}} \\ ACL Packets 
+		}	
+		& \parbox{9cm}{
+			\fbox{ \includegraphics[width=8.5cm]{./bilder/bt-sco.png}} \\ Synchronous Packets 
+		}
+	\end{tabular}	\\
+
+	The packets are transmitted in the first “part” of the time slots. The master sends always 
+	in even slots. \\
 	
 	\begin{minipage}{16cm}
 		\includegraphics[width=16cm]{./bilder/bt-packet-transmission.png} 
-	\end{minipage}
+	\end{minipage} \\
+ 
 
-	The packets are transmitted in the first “part” of the time slots. The master sends always 
-	in even slots. 
-
-	HV3 packets are periodically transmitted to guaranty a time bounded 64 kb/s voice 
-	service. HV3 packets are not retransmitted (in contrast to the eSCO packets EVx 
+	HVx packets are periodically transmitted (e.g. in every 7th slot) to guaranty a time bounded 64 kb/s voice 
+	service. HVx packets are not retransmitted (in contrast to the eSCO packets EVx 
 	packets). 
 
 	The slave has to retransmit the DM1-packet B because it receives a NAK in the header 
