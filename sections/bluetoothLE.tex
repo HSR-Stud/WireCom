@@ -6,11 +6,17 @@
 				\item Target: Ultra low power application which runs with coin cell battery
 				\item Works with 40 channels of 2 MHz in the 2.4 GHz band
 				\item GFSK Modulation (Gaussian Frequency Shift Keying)
-				\item Bitrate of 1 Mb/s
+				\item Bitrate of 1 Mb/s on the air interface (0.2 Mb/s application data rate)
 				\item client server architecture
 				\item Only star networks possible
 				\item Uses advertising events on 3 channels to broadcast data without established connection (no hopping, using 3 channels in sequence)
 				\item Data exchange with frequency hopping on 37 data channels when connection established
+				\item Inquiry time: 20ms - 10s (due to advertisement interval)
+				\item Connecting time: $\leq 3$ms after advertisement
+				\item Radio range 10-20m indoor, somewhat larger than BT-BR/EDR (power class 2) due to more sensitive receiver
+				\item Peak current consumption $\leq 15$mA to run on coin cell battery
+				\item Power consumption 1-50\% of Bluetooth BR/EDR, depending on use case
+				\item BLE is not voice capable
 			\end{itemize}
 
 		}	
