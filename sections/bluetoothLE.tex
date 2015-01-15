@@ -33,7 +33,7 @@
 		
 	\subsection{Message Sequence Chart}
 		\begin{tabular}{ll}
-			\parbox{12cm}{
+			\parbox{11cm}{
 				This is an example for a Message Sequence Chart between a Bluetooth LE advertiser and a Bluetooth LE initiator, assuming that 
 				\begin{itemize}
 					\item the advertising interval is 1s (and the random advertising delay can be neglected)  
@@ -45,10 +45,30 @@
 					\item the host of the slave requests to send a notification with a newvalue at $t = 7.5$s 
 				\end{itemize}
 			}
-			& \parbox{6cm}{
-				\fbox{ \includegraphics[width=6cm]{./bilder/ble-msc.png}}
+			& \parbox{7cm}{
+				\fbox{ \includegraphics[width=7cm]{./bilder/ble-msc.png}}
 			}	
 		\end{tabular}
 			
-			
+	\subsection{Scanning}
+		\begin{tabular}{ll}
+			\parbox{9cm}{
+				The \textbf{scanner} is listening for advertising channel packets from devices that are advertising. A passive 
+				scanner is only listening, while an active scanner may request an advertiser to send additional information. \\
+				
+				\textbf{Advertising Channel PDU types} \\
+				\begin{tabular}{|l|c|c|}
+					\hline \textbf{Advertising event type} & \textbf{SCAN} & \textbf{CONNECT} \\ 
+					\hline & \multicolumn{2}{|c|}{allowed} \\
+					\hline ADV-IND & YES & YES \\ 
+					\hline ADV-DIRECT-IND & NO & YES \\ 
+					\hline ADV-NONCONN-IND & NO & NO \\ 
+					\hline ADV-SCAN-IND & YES & NO \\ 
+					\hline 
+				\end{tabular} \\ \\ \\
+			}
+			& \parbox{9cm}{
+				\fbox{ \includegraphics[width=8cm]{./bilder/ble-scanning.png}}
+			}
+		\end{tabular}	
 			
