@@ -63,18 +63,16 @@
 				scanner is only listening, while an active scanner may request an advertiser to send additional information. \\
 				
 				\textbf{Advertising Channel PDU types} \\
-				\begin{tabular}{|l|c|c|}
-					\hline \textbf{Advertising event type} & \textbf{SCAN} & \textbf{CONNECT} \\ 
-					\hline & \multicolumn{2}{|c|}{allowed} \\
-					\hline ADV-IND & YES & YES \\ 
-					\hline ADV-DIRECT-IND & NO & YES \\ 
-					\hline ADV-NONCONN-IND & NO & NO \\ 
-					\hline ADV-SCAN-IND & YES & NO \\ 
-					\hline 
-				\end{tabular} \\ \\ \\
-			}
+				\begin{tabular}{|l|c|c|} \hline 
+					\textbf{Advertising event type} & \textbf{SCAN} & \textbf{CONNECT} \\ \hline \hline
+					& \multicolumn{2}{|c|}{allowed}  \\ \hline
+					ADV-IND & YES & YES \\ \hline 
+					ADV-DIRECT-IND & NO & YES \\ \hline 
+					ADV-NONCONN-IND & NO & NO \\ \hline 
+					ADV-SCAN-IND & YES & NO \\ \hline 	
+				\end{tabular} }
 			& \parbox{9cm}{
-				\fbox{ \includegraphics[width=8cm]{./bilder/ble-scanning.png}}
+				\fbox{ \includegraphics[width=9cm]{./bilder/ble-scanning.png}}
 			}
 		\end{tabular}	
 			
