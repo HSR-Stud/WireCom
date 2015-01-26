@@ -113,8 +113,7 @@ $$ T_{\text{coh}} < \dfrac{N_c}{R} = T_{\text{Subcarrier}} $$
 \end{tabular}
 
 Im Vergleich zur seriellen Übertragung ergibt sich bei der gleichen
-Übertragungsrat eine viel längere
-Symbolzeit, da die Daten parallel übertragen werden ergibt. Dies
+Übertragungsrat eine viel längere Symbolzeit, da die Daten parallel übertragen werden. Dies
 ermöglicht es gegenüber Einträgerverfahren, viel weniger Bandbreite zu nutzen.
 \\
 
@@ -406,3 +405,35 @@ $M$-QAM & $(\pm (2m-1)\pm j(2n-1))A,$ & $A=\sqrt{\frac{3}{2(M-1)}}$
 	Übersicht einzelner Modulationen mit einer SER von $10^{-5}$
 	}
 \end{tabular}
+
+\subsubsection{Kanalcodierung mit FEC \formelbuch{2-12}}
+	\begin{tabular}{ll}
+		\parbox{11cm}{
+			Mit Interleaving kann eine Verbesserung der BER erreicht werden, vorallem in Bezug auf Fading. 
+			Bei diesem Verfahren werden die Büschelfehler (engl. burst errors) durch Verschachtelung 
+			auf mehrere Codewörter verteilt, damit die Fehlerkorrektur besser funktioniert.\\
+			Im Prinzip werden bei Bit-Interleaving die Codewörter im Zeitmultiplex übertragen.
+			Wenn vier Bit hintereinander verfälscht werden, betrifft dies je ein Bit pro Codewort.\\
+			\fbox{ \includegraphics[width=11cm]{./bilder/modulation-interleaving.png}}
+		}	
+		& \parbox{7cm}{
+			\fbox{ \includegraphics[width=6.5cm]{./bilder/modulation-interleaving-snr.png}}
+		}
+	\end{tabular}
+	
+	\textbf{Faltungscode und Viterbi-Decodierung} \\
+	Als Beispiel eines fehlerkorrigierenden Faltungcodes wird stellvertretend die Viterbi-Codierung erläutert.\\
+	\begin{tabular}{ll}
+		\parbox{6cm}{
+			\fbox{ \includegraphics[width=5cm]{./bilder/modulation-viterbi-coder.png}} \\ 
+			\textit{Viterbi-Coder:} Man startet immer beim 00-Zustand und hört auch dort wieder auf.
+		}	
+		& \parbox{12cm}{
+			\fbox{ \includegraphics[width=12cm]{./bilder/modulation-viterbi-decoder.png}} \\ 
+			\textit{Viterbi-Decoder:} Man geht zuerst von links nach rechts und addiert die übereinstimmenden
+			bits des $Y_{empfangen}$ für alle möglichen Pfade. Danach geht man vom Ende zurück und
+			wählt den Pfad mit den meisten Punkten. Dies ergibt den $Y_{fehlerkorrigiert}$ und
+			daraus kann man die decodierten Daten ermitteln.
+		}
+	\end{tabular}
+	

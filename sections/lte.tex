@@ -8,7 +8,7 @@
         \item Flexible Frequenzzuweisung (1.25/2.5, 5, 10, 15, 20MHz)
 		\item Nur IP-Services (Ausnahme ist SMS, das weiter mit Signalisierungsmeldungen funktioniert.)
     \end{liste}
-
+	
 \subsection{Downlink}
 	LTE verwendet als Zugriffsverfahren im Downlink OFDMA im Gegensatz zu GSM und UMTS.
 
@@ -24,5 +24,15 @@
 		Der Trägerabstand beträgt 15kHz, womit eine Nutzsymboldauer von $1/15\text{kHz}=66.7\mu$s resultiert.
 	\end{minipage}
 	
+\subsection{Uplink}
+
+\subsection{Timing Advance}
+	Wie bei GSM braucht es auch bei LTE ein sogenanntes Time Advance (TA) beim Sender des UE, damit die Signale
+	in das Zeitraster bei der Basisstation hineinpassen. \\
+	Der TA-Wert ist zwischen 0 und 20512. Die Schrittweite is jeweils 
+	$\Delta T = \frac{1}{2048}\cdot T_{sym} = \frac{1}{2048\cdot f_{sym}} = \frac{1}{2048\cdot 15\text{kHz}}$ \\
+	
+	Daraus resultiert der maximale Abstand der ein Endgerät von der Basisstation haben kann: \\
+	Distanz $D = 20512\cdot \frac{\Delta T \cdot c}{2} = 100.2$km 
 	
 	
