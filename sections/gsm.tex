@@ -1,4 +1,5 @@
-\section{GSM \formelbuch{242}}
+\section{GSM}
+\label{sec:gsm}
 	\begin{center}
 	\begin{tabular}{|l|l|l|l|l|} \hline
 	          & GSM850     & GSM900        & GSM1800 (DCS)       & GSM1900 (PCS) \\ \hline  \hline
@@ -71,6 +72,13 @@
 	dem MS die Zeitverschiebung (TA, Timing Advance) mitgeteilt. Der TA kann 64 Werte haben wobei 1 Bit ($T_B=3.69$\,$\mu$s) einer 
 	Distanz von ca. 550m zur BTS entspricht (z.B. ein $\text{TA}=63$ entspricht $63 \cdot 550\text{m} = 35\text{km}$ Distanz zwischen MS und BS).
 
+\subsection{Modulation}
+	Bei GSM wurde zu Beginn GMSK verwendet. Nach der Erweiterung auf EDGE für grössere Datenraten 
+	bei Datenkommunikation ist nun auch 8-PSK implementiert. 
+	Weil nun 3 bits pro Symbol übertragen werden, ergibt sich $R_{8-PSK}=3\cdot R_{GMSK}$. Die 
+	Bandbreite B bleibt dabei die gleiche, weil die Symboldauer die gleiche ist. Allerdings 
+	ist die Reichweite bei GMSK grösser als bei 8-PSK, weil 8-PSK Systeme eine höhere SNR benötigen.
+	
 \subsection{Logische Kanäle und Bursts}
     Die Datenübertragung und Signalisierung zwischen MS (Mobile Station) und BS (Base Station) ist in 11 Kanäle 
     unterteilt.
