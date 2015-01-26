@@ -381,6 +381,24 @@
 % 	}}
 % 	\end{center}
 
+\subsection{Distance calculation}
+	
+	\begin{tabular}{ll}
+		\parbox{11cm}{
+			To determine the distance between the GPS-receivers position and the position with the same 
+			latitude on the Greenwich-null-meridian, the following formula can be used 
+			(Latitude $\varphi$ and longitude $\lambda$ are given by the GPS-receiver):\\
+			Distance $D = \lambda \text{[min]} \cdot 1.852 \text{km} \cdot cos(\frac{\pi}{180}\cdot \varphi \text{[deg]}) $ \\
+			
+			\textbf{Example:}
+			Latitude $\varphi = 47^\circ$ 17.115 min and longitude $\lambda = 8^\circ$ 33.912 min \\
+			$D = (8\cdot 60 + 33.912) \text{[min]} \cdot 1.852 \text{km} \cdot cos(\frac{\pi}{180}\cdot (47 + 17.115/60) \text{[deg]}) = 645.6$km
+		}	
+		& \parbox{7cm}{
+			\includegraphics[width=7cm]{./bilder/gps-distance.png}\\ 
+		}
+	\end{tabular}
+
 \subsection{Genauigkeitsangaben}
 \begin{tabular}{|l|l|}
 	\hline
