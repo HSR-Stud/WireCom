@@ -147,7 +147,11 @@
 	packets). 
 
 	The slave has to retransmit the DM1-packet B because it receives a NAK in the header 
-	of DM1-packet C. This procedure is also called fast Automatic Repeat reQuest ARQ. 
-
+	of DM1-packet C. This procedure is also called fast Automatic Repeat reQuest ARQ. \\
+	
+	\textbf{Example:} Calculation of net data rate R for 3-DH1 (Up- or Downlink, with total 6 slots) \\
+	$R = \frac{U_{pl}\cdot 8 \text{bit}}{N_{slots}\cdot T_{slot}} = \frac{83\cdot 8 \text{bit}}{6\cdot 625\mu s} = 177$kbps \\
+	Where: $U_{pl}=$ User Payload [bytes], $N_{slots}=$ Total number of slots, $T_{slot}=625\mu$s = Slot time
+	
 	
 	
