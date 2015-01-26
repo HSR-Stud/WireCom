@@ -189,31 +189,31 @@
     \end{minipage}\\
 	IF von 47.65MHz; $f_s=38.194$MHz ergibt $IF_{Digital}=47.65-38.194=9.456$MHz
     
-\subsection{GPS und die Relativitätstheorie\formelbuch{202}}
-	\begin{minipage}{10cm}
-    	\includegraphics[height=4.5cm]{./bilder/GPS-Relativitaettheory.png}\\
-    	Lichtuhrversucht für die Spezielle Relativitätstheorie
-    \end{minipage}
-	\begin{minipage}{8cm}
-		\includegraphics[height=5cm]{./bilder/GPS-ZeitKorrektur.png}\\
-		Übersicht der beiden wirkenden Zeitveränderungen
-	\end{minipage}\\ \\
-	Das Licht legt die Strecke d zurück löst einen Impuls aus und wird
-	reflektiert, etc. (\textbf{spezielle Realtivitätstheorie}) \\
-	$v=konst.\Rightarrow$ Zeit des bewegenden Objekts ist langsamer da eine
-	grössere Strecke zurückgelegt werden muss 
-	$ t'_{bew} = \frac{t_{ruh}}{\sqrt{1 - \frac{v^2}{c^2}}}$\\
-	Für einen Satelliten ergibt sich dann:
-	$t_{SV_1}= t_{Erde} \frac 1{\sqrt{1-\frac{g}{c^2}\cdot \frac{R_E^2}R}}$\\
-	Die \textbf{generelle Relativitätstheorie} besagt, dass sich ein Clock
-	langsamer ist, wenn er in einem Gravitationsfeld ist.\\
-	$t_2 = t_0 \frac 1{\sqrt{1-\frac{2GM}{Rc^2}}} 
-  	= t_0 \frac 1{\sqrt{1-\frac{g}{c^2}\cdot 2\frac{R_E^2}R}}$; 
-  	$t_{SV_2}= t_E \frac{\sqrt{1-\frac{g}{c^2}\cdot 2 R_E }}
-    {\sqrt{1-\frac{g}{c^2}\cdot 2\frac{R_E^2}R }}$\\
-    Der totale Effekt ist, dass der Quarz des Satelliten mit nur
-    10.229999995433MHz anstatt den 10.23MHz laufen muss.
-    
+%\subsection{GPS und die Relativitätstheorie\formelbuch{202}}
+%	\begin{minipage}{10cm}
+%    	\includegraphics[height=4.5cm]{./bilder/GPS-Relativitaettheory.png}\\
+%    	Lichtuhrversucht für die Spezielle Relativitätstheorie
+%    \end{minipage}
+%	\begin{minipage}{8cm}
+%		\includegraphics[height=5cm]{./bilder/GPS-ZeitKorrektur.png}\\
+%		Übersicht der beiden wirkenden Zeitveränderungen
+%	\end{minipage}\\ \\
+%	Das Licht legt die Strecke d zurück löst einen Impuls aus und wird
+%	reflektiert, etc. (\textbf{spezielle Realtivitätstheorie}) \\
+%	$v=konst.\Rightarrow$ Zeit des bewegenden Objekts ist langsamer da eine
+%	grössere Strecke zurückgelegt werden muss 
+%	$ t'_{bew} = \frac{t_{ruh}}{\sqrt{1 - \frac{v^2}{c^2}}}$\\
+%	Für einen Satelliten ergibt sich dann:
+%	$t_{SV_1}= t_{Erde} \frac 1{\sqrt{1-\frac{g}{c^2}\cdot \frac{R_E^2}R}}$\\
+%	Die \textbf{generelle Relativitätstheorie} besagt, dass sich ein Clock
+%	langsamer ist, wenn er in einem Gravitationsfeld ist.\\
+%	$t_2 = t_0 \frac 1{\sqrt{1-\frac{2GM}{Rc^2}}} 
+%  	= t_0 \frac 1{\sqrt{1-\frac{g}{c^2}\cdot 2\frac{R_E^2}R}}$; 
+%  	$t_{SV_2}= t_E \frac{\sqrt{1-\frac{g}{c^2}\cdot 2 R_E }}
+%    {\sqrt{1-\frac{g}{c^2}\cdot 2\frac{R_E^2}R }}$\\
+%    Der totale Effekt ist, dass der Quarz des Satelliten mit nur
+%    10.229999995433MHz anstatt den 10.23MHz laufen muss.
+%    
 %\newpage    
 \subsection{Acquisition and Tracking\formelbuch{206}}
 
@@ -246,32 +246,32 @@
 	current received satellite, while the Almanac data, which is spread over the 12.5 min of the Navigation message, 
 	contains the less accurate orbital position of the other satellites.
 	
-\subsubsection{Chip resolution}
-	\begin{minipage}{10cm}
-	    \includegraphics[width=8cm]{./bilder/GPS-ChipResolution.png}
-    \end{minipage}
-	\begin{minipage}{8cm}
-    	Da die Phase nicht genau bekannt ist, treten bei der Detektion des
-		Spitzes der Autokorrelation Verluste auf, da nicht mehr das Maximum erwischt
-		wird.\\
-		$\text{loss [dB]}= 20 \log_{10}\left(1-\frac{|\Delta
-		t|}{T_{\mathrm{chip}}}\right)$\\
-    \end{minipage}
-\subsubsection{Frequenz resolution}
-	\begin{minipage}{8cm}
-    	\includegraphics[width=6cm]{./bilder/GPS-FrequenzResolution.png}
-    \end{minipage}
-	\begin{minipage}{10cm}
-	    Bei einem unbekannten Doppler Shift und einer unbekannten Frequenzabweichung
-		treten in der Integration Verluste auf.\\
-		$\text{loss [dB]}= 20 \log_{10} \frac{\sin(\pi f_{\mathrm{offset}}T)} {\pi
-		f_{\mathrm{offset}}T}$\\
-     	Grafik links zeigt den Verlust nach der Integration von einer Sequenz
-     	(1ms).
-    \end{minipage}
-\subsubsection{AD conversion with N-bit resolution \formelbuch{210}}
-	Die Verluste eines 1-Bit Quantisierer beträgt ca. 2dB. Die eines 1Bit NCO ca.
-	1dB.
+%\subsubsection{Chip resolution}
+%	\begin{minipage}{10cm}
+%	    \includegraphics[width=8cm]{./bilder/GPS-ChipResolution.png}
+%    \end{minipage}
+%	\begin{minipage}{8cm}
+%    	Da die Phase nicht genau bekannt ist, treten bei der Detektion des
+%		Spitzes der Autokorrelation Verluste auf, da nicht mehr das Maximum erwischt
+%		wird.\\
+%		$\text{loss [dB]}= 20 \log_{10}\left(1-\frac{|\Delta
+%		t|}{T_{\mathrm{chip}}}\right)$\\
+%    \end{minipage}
+%\subsubsection{Frequenz resolution}
+%	\begin{minipage}{8cm}
+%    	\includegraphics[width=6cm]{./bilder/GPS-FrequenzResolution.png}
+%    \end{minipage}
+%	\begin{minipage}{10cm}
+%	    Bei einem unbekannten Doppler Shift und einer unbekannten Frequenzabweichung
+%		treten in der Integration Verluste auf.\\
+%		$\text{loss [dB]}= 20 \log_{10} \frac{\sin(\pi f_{\mathrm{offset}}T)} {\pi
+%		f_{\mathrm{offset}}T}$\\
+%     	Grafik links zeigt den Verlust nach der Integration von einer Sequenz
+%     	(1ms).
+%    \end{minipage}
+%\subsubsection{AD conversion with N-bit resolution \formelbuch{210}}
+%	Die Verluste eines 1-Bit Quantisierer beträgt ca. 2dB. Die eines 1Bit NCO ca.
+%	1dB.
 
 \subsection{Leistungsfähigkeit und Interferenzen\formelbuch{214}}
 	Die Genauigkeit der Positionsmessung wird von folgenden Parameter beeinflusst:
@@ -399,21 +399,22 @@
 		}
 	\end{tabular}
 
-\subsection{Genauigkeitsangaben}
-\begin{tabular}{|l|l|}
-	\hline
-	\textbf{Bezeichnung} & \textbf{Beschreibung}\\
-	\hline
-	\hline
-	CEP & Radius des Kreises der 50\% aller Messungen beinhaltet\\
-	\hline
-	R95 & Radius des Kreises der 95\% aller Messungen beinhaltet R95
-	= 2 CEP\\
-	\hline
-	R989 & Radius des Kreises der 98.9\% aller Messungen beinhaltet R989
-	= 2.55 CEP\\
-	\hline
-\end{tabular}
+%\subsection{Genauigkeitsangaben}
+%\begin{tabular}{|l|l|}
+%	\hline
+%	\textbf{Bezeichnung} & \textbf{Beschreibung}\\
+%	\hline
+%	\hline
+%	CEP & Radius des Kreises der 50\% aller Messungen beinhaltet\\
+%	\hline
+%	R95 & Radius des Kreises der 95\% aller Messungen beinhaltet R95
+%	= 2 CEP\\
+%	\hline
+%	R989 & Radius des Kreises der 98.9\% aller Messungen beinhaltet R989
+%	= 2.55 CEP\\
+%	\hline
+%\end{tabular}
+
 \subsection{GLONASS}
 	GLONASS is a Russian Global Navigation Satellite System that works similar to the NAVSTAR-GPS
 \subsection{Galileo}
