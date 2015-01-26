@@ -55,6 +55,20 @@
 	Satelliten (SV) berechen. So kann man aus 3 Distanzen die eigene Position
 	berechen. Da jedoch die Userzeit nicht zwingend mit der des SVs
 	überreinstimmt,  braucht man einen zusätztlichen SV.
+
+\subsubsection{Time-of-Fly measurement}
+	\begin{minipage}{14cm}    
+        \includegraphics[width=14cm]{./bilder/gps-timeoffly.png}    
+    \end{minipage}
+	
+	Procedure: \\
+	\begin{enumerate}
+		\item Determine $\Delta t = \Delta t_1 - \Delta t_2$ (can be also negative if the signal of Tx1 arrives before Tx2)
+		\item Calculate the distance to Tx1 $D = \frac{\Delta t\cdot c + A}{2}$
+		\item The distance to Tx2 is given by $d_2 = A-D$
+		
+	\end{enumerate}	
+	
 \subsection{Systemübersicht\formelbuch{183}} 
 
     \begin{minipage}{13cm}
@@ -96,10 +110,10 @@
             \end{liste}
 		\end{minipage} 
 	\subsubsection{PRN Sequenz: Gold code}
-		\begin{minipage}{10cm}
+		\begin{minipage}{9.5cm}
         	\includegraphics[width=9cm]{./bilder/GPS-Gold.png}
         \end{minipage}
-		\begin{minipage}{8cm}
+		\begin{minipage}{8.5cm}
         	Jeder SV hat genau eine Sequenz
         	von $2^n-1=2^{10}-1=1023$ Bits. Dadurch wird die PRN Sequenz alle
         	1ms wiederholt. Pro Datenbit hat es genau 20 Sequenzen, dass heisst es
@@ -109,7 +123,11 @@
         	Signal wird der Ausgang des ersten Register mit dem verzögerten
         	Ausgang oder durch EXOR verknüpte Bit des zweiten Register verknüpft.
         	Je nach Verzögerung bzw. EXOR- Verknüpfung kann man auf den Satellit
-        	schliessen.
+        	schliessen. \\
+			These so called spreading codes (signature codes) are used for the identification 
+			of the satellite (CDMA) with the unique signature pattern, as well as for the signal
+			travel time measurement via correlation. Thus resulting in a much smaller peak-power 
+			than sending a short pulse with the same signal energy.
         \end{minipage}
 			
 	\subsubsection{Signalleistung}
@@ -222,7 +240,11 @@
     \end{minipage}
 	
 	Mit Hilfe von Assisted GPS (A-GPS) kann die TTFF drastisch verkleinert werden (auf ca. 1-3\,s). Beim A-GPS werden die 
-	Ephemeris Daten auf einem Referenz Location Server gespeichert und in sehr schnellen Zyklen gebroadcastet (z.B. via GPRS/UMTS).
+	Ephemeris Daten auf einem Referenz Location Server gespeichert und in sehr schnellen Zyklen gebroadcastet (z.B. via GPRS/UMTS). \\
+	
+	\textbf{Note:} The Ephemeris data, which is sent every 30s, contains the highly accurate orbital position of the 
+	current received satellite, while the Almanac data, which is spread over the 12.5 min of the Navigation message, 
+	contains the less accurate orbital position of the other satellites.
 	
 \subsubsection{Chip resolution}
 	\begin{minipage}{10cm}
