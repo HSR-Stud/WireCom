@@ -34,8 +34,7 @@
 	    }
 \end{tabular}
 
-\subsubsection{CDMA - Code Division Multiple Access - Code Multiplexing
-\formelbuch{53}} 
+\subsubsection{CDMA - Code Division Multiple Access - Code Multiplexing} 
 Prinzip:\\
 Die Trägerfrequenzen werden mit Hilfe eines Codes zeitlich variiert. Durch eine
 Korrelation mit demselben Codes kann man die richtigen Daten auch bei
@@ -52,6 +51,21 @@ Zeitschlitz, Kanalfrequenz, etc. nötig sind)\\
 - Schlechtes Near-Far-Verhalten
 (wenn ein starker (naher) Teilnehmer einen schwachen (fernen) unterdrückt). \\
 	
+\textbf{Beispiel:} \\
+In einem CDMA-System spreizen $K=2$ Benutzer ihre bipolaren Daten-Bits $d_k \in \{-1,+1\}$ 
+synchron mit den folgenden Codes mit je $N=7$ Chips: \\
+$s_1=[ -1, 1, 1, -1, -1, -1, 1 ]$, 
+$s_2=[ -1, 1, 1, -1, 1, -1, -1 ]$, 
+$s_3=[ 1, 1, 1, 1, -1, 1, -1 ]$, 
+$s_4=[ -1, 1, -1, -1, 1, 1, -1 ]$
+
+Der Empfänger erhält die folgende verrauschte, abgetastete Summen-Chip-Folge \\
+$r=[-2, 0, -2, -2, 2, 0, -2]$ 
+
+Um das bipolare Daten-Bit $d_1$ des Benutzer 1 zu bestimmen, kann man folgende
+Formel verwenden: \\
+$d_1 = sign(r\cdot s_1^T) = sign([-2, 0, -2, -2, 2, 0, -2]\cdot [ -1, 1, 1, -1, -1, -1, 1 ]^T)=sign(-2)=-1$
+
 
 \subsubsection{OFDM - Orthogonal Frequency Division Multiplexing
 \formelbuch{55}}

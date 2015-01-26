@@ -124,15 +124,16 @@ Tag $\rightarrow$ Reader: Uplink
 		\item Frequenz: 5MHz - 100MHz
 		\item Typischerweise 13.56MHz (90\% aller RFID Applikationen arbeiten mit dieser Frequenz)
 		\item Induktive Kopplung (Spulen als Empfänger) - inductive near-field coupling (-60dB/decade)
-		\item Flüssigkeiten haben nur einen geringen, Metalle haben einen grossen Störeinfluss
+		\item Flüssigkeiten haben nur einen sehr geringen, Metalle haben einen grossen Störeinfluss
 		\item Downlink: ASK Modulation
 		\item Uplink: Load Modulation
 		\item Anticollision: ALOHA
 		\item Reader Talks first
 		\item Hohe Frequenz $\rightarrow$ 3-10 Windungen
 		\item Spulengrösse $\rightarrow$ Leseabstand = Spulendurchmesser von Reader Antenne
+		\item Typische Anwendung: Access control, Ski-Pass, item management
 	\end{itemize}
-\subsubsection{Modulation bei induktiver Kopplung}
+\subsubsection{Modulation bei induktiver Kopplung \formelbuch{HF-RFID,9-18}}
 	\begin{itemize}
 		\item Downlink: ASK Modulation, Nicht zu viele Nullen senden, sonst hat Tag zu wenig Power. Je höher Modulationstiefe, umso weniger Energie. 
 		\item Uplink: Lastmodulation, Manchester coded, Tag schliesst Antenne kurz, wird auf Hauptträger draufmoduliert (mit Subträger) $\rightarrow$
