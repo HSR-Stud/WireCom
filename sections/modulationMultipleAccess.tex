@@ -27,15 +27,14 @@
 		Für die Zuordnung der Zeitschlitze für einen neuen Teilnehmer meldet sich
 		dieser zuerst bei der Basisstation. Dabei kann es zu Kollisionen mit anderen
 		Teilnehmern kommen. Erneutes Melden bei der Basisstation erfolgt beim
-		ALOHA-Prinzip erfolgt nach einer zufällige Zeitdauer, womit die erneute
+		ALOHA-Prinzip nach einer zufällige Zeitdauer, womit die erneute
 		Kollision vermieden wird.} 
 	& \parbox{9cm}{
 	    \includegraphics[width=6cm]{./bilder/modulation_aloha.png}
 	    }
 \end{tabular}
 
-\subsubsection{CDMA - Code Division Multiple Access - Code Multiplexing
-\formelbuch{53}} 
+\subsubsection{CDMA - Code Division Multiple Access - Code Multiplexing} 
 Prinzip:\\
 Die Trägerfrequenzen werden mit Hilfe eines Codes zeitlich variiert. Durch eine
 Korrelation mit demselben Codes kann man die richtigen Daten auch bei
@@ -52,6 +51,21 @@ Zeitschlitz, Kanalfrequenz, etc. nötig sind)\\
 - Schlechtes Near-Far-Verhalten
 (wenn ein starker (naher) Teilnehmer einen schwachen (fernen) unterdrückt). \\
 	
+\textbf{Beispiel:} \\
+In einem CDMA-System spreizen $K=2$ Benutzer ihre bipolaren Daten-Bits $d_k \in \{-1,+1\}$ 
+synchron mit den folgenden Codes mit je $N=7$ Chips: \\
+$s_1=[ -1, 1, 1, -1, -1, -1, 1 ]$, 
+$s_2=[ -1, 1, 1, -1, 1, -1, -1 ]$, 
+$s_3=[ 1, 1, 1, 1, -1, 1, -1 ]$, 
+$s_4=[ -1, 1, -1, -1, 1, 1, -1 ]$
+
+Der Empfänger erhält die folgende verrauschte, abgetastete Summen-Chip-Folge \\
+$r=[-2, 0, -2, -2, 2, 0, -2]$ 
+
+Um das bipolare Daten-Bit $d_1$ des Benutzer 1 zu bestimmen, kann man folgende
+Formel verwenden: \\
+$d_1 = sign(r\cdot s_1^T) = sign([-2, 0, -2, -2, 2, 0, -2]\cdot [ -1, 1, 1, -1, -1, -1, 1 ]^T)=sign(-2)=-1$
+
 
 \subsubsection{OFDM - Orthogonal Frequency Division Multiplexing
 \formelbuch{55}}
@@ -99,15 +113,17 @@ $$ T_{\text{coh}} < \dfrac{N_c}{R} = T_{\text{Subcarrier}} $$
 \end{tabular}
 
 Im Vergleich zur seriellen Übertragung ergibt sich bei der gleichen
-Übertragungsrat eine viel längere
-Symbolzeit, da die Daten parallel übertragen werden ergibt. Dies
+Übertragungsrat eine viel längere Symbolzeit, da die Daten parallel übertragen werden. Dies
 ermöglicht es gegenüber Einträgerverfahren, viel weniger Bandbreite zu nutzen.
 \\
 
 Problem der \textbf{Multidimensional Interference (MDI)}:
 \begin{liste}
     \item \textbf{Intersymbolic Interference (ISI)} \\
-            Symbole überlappen sich im Zeitbereich (wegen Faltung mit Impulsantwort des Kanals - Laufzeit, Echo, usw.)
+            Symbole überlappen sich im Zeitbereich (wegen Faltung mit Impulsantwort des Kanals - Laufzeit, Echo, usw.). 
+			Um dies zu vermeiden wird in der Regel ein Guard Intervall $T_{Guard}$ zwischen den Symbolen eingefügt. 
+			Wenn ein ISI verhindert werden soll, dann darf der Unterschied zwischen dem LOS-Ausbreitungspfad und einem 
+			Nicht-LOS-Ausbreitungspfad maximal $D_{max} = c\cdot T_{Guard}$ sein.
     \item \textbf{Inter Channel Interference (ICI)} \\
             Subcarrier sind nicht mehr orthogonal. \\
 \end{liste}
@@ -264,8 +280,11 @@ Spezielle Formen:\\
      
         
 \subsubsection{GMSK - Gaussian Minimum Shift Keying \formelbuch{67}}
-Das GMSK ist ein MSK mit einem gauss'schen premodularen Filter. Es besitzt eine
-konstante Amplitude und eine grosse spektrale Effizient.
+Das GMSK ist ein MSK mit einem gauss'schen premodularen Filter, welches eine gauss'sche Pulsform
+anstelle der sinusförmigen Pulsform erzeugt. Es besitzt eine
+konstante Amplitude und eine grosse spektrale Effizient. 
+
+Bei GSM wurde zu Beginn GMSK verwendet. Siehe Kapitel \ref{sec:gsm} - Modulation.
         
 
 \subsubsection{OQPSK - Offset Quadratur Phase Shift Keying \formelbuch{75, 68}}
@@ -370,19 +389,51 @@ $M$-QAM & $(\pm (2m-1)\pm j(2n-1))A,$ & $A=\sqrt{\frac{3}{2(M-1)}}$
 	einen breiten Mainlobe mit schwachen Sidelobes oder umgekehrt.
     \end{enumerate}
   
-    \subsubsection{Raised-Cosine-Filter \formelbuch{63}}
-    $h(t) = \frac{\sin\left((t/T)\pi\right)}{(t/T)\pi}\cdot
-        \frac{\cos\left(\rho(t/T)\pi\right)}{1-4\rho^2(t/T)^2}$\\
-   
-    \includegraphics[width=5cm]{./bilder/modulation_raised_cosine_frequency.png}
-    \includegraphics[width=5cm]{./bilder/modulation_raised_cosine_time.png} 
-    
-    Das \textbf{Root-Raised-Cosine-Filter} entspricht der Wurzel des
-    Raised-Cosine-Filters und wird angewendet, wenn die Charakteristik 
-    des Raised-Cosine-Filters auf Sender und Empfänger
-    gleichmässig verteilt werden soll.
+%    \subsubsection{Raised-Cosine-Filter \formelbuch{63}}
+%    $h(t) = \frac{\sin\left((t/T)\pi\right)}{(t/T)\pi}\cdot
+%        \frac{\cos\left(\rho(t/T)\pi\right)}{1-4\rho^2(t/T)^2}$\\
+%   
+%    \includegraphics[width=5cm]{./bilder/modulation_raised_cosine_frequency.png}
+%    \includegraphics[width=5cm]{./bilder/modulation_raised_cosine_time.png} 
+%    
+%    Das \textbf{Root-Raised-Cosine-Filter} entspricht der Wurzel des
+%    Raised-Cosine-Filters und wird angewendet, wenn die Charakteristik 
+%    des Raised-Cosine-Filters auf Sender und Empfänger
+%    gleichmässig verteilt werden soll.
     } &\parbox{7cm}{
 	\includegraphics[width=7cm]{./bilder/modulation_SER.png}\\
 	Übersicht einzelner Modulationen mit einer SER von $10^{-5}$
 	}
 \end{tabular}
+
+\subsubsection{Kanalcodierung mit FEC \formelbuch{2-12}}
+	\begin{tabular}{ll}
+		\parbox{11cm}{
+			Mit Interleaving kann eine Verbesserung der BER erreicht werden, vorallem in Bezug auf Fading. 
+			Bei diesem Verfahren werden die Büschelfehler (engl. burst errors) durch Verschachtelung 
+			auf mehrere Codewörter verteilt, damit die Fehlerkorrektur besser funktioniert.\\
+			Im Prinzip werden bei Bit-Interleaving die Codewörter im Zeitmultiplex übertragen.
+			Wenn vier Bit hintereinander verfälscht werden, betrifft dies je ein Bit pro Codewort.\\
+			\fbox{ \includegraphics[width=11cm]{./bilder/modulation-interleaving.png}}
+		}	
+		& \parbox{7cm}{
+			\fbox{ \includegraphics[width=6.5cm]{./bilder/modulation-interleaving-snr.png}}
+		}
+	\end{tabular}
+	
+\subsubsection{Faltungscode und Viterbi-Decodierung}
+	Als Beispiel eines fehlerkorrigierenden Faltungcodes wird stellvertretend die Viterbi-Codierung erläutert.\\
+	\begin{tabular}{ll}
+		\parbox{6cm}{
+			\fbox{ \includegraphics[width=5cm]{./bilder/modulation-viterbi-coder.png}} \\ 
+			\textit{Viterbi-Coder:} Man startet immer beim 00-Zustand und hört auch dort wieder auf.
+		}	
+		& \parbox{12cm}{
+			\fbox{ \includegraphics[width=12cm]{./bilder/modulation-viterbi-decoder.png}} \\ 
+			\textit{Viterbi-Decoder:} Man geht zuerst von links nach rechts und addiert die übereinstimmenden
+			bits des $Y_{empfangen}$ für alle möglichen Pfade. Danach geht man vom Ende zurück und
+			wählt den Pfad mit den meisten Punkten. Dies ergibt den $Y_{fehlerkorrigiert}$ und
+			daraus kann man die decodierten Daten ermitteln.
+		}
+	\end{tabular}
+	

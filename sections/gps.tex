@@ -1,7 +1,7 @@
 \section{GPS - Global Positioning System \formelbuch{181}}
 \subsection{Einführung\formelbuch{181}}  
-        Ziele von NAVSTAR-GPS=NAVigation System with Timing and Raning Global
-        Positoining System:
+        Ziele von NAVSTAR-GPS=NAVigation System with Timing and Ranging Global
+        Positioning System:
         
     \begin{minipage}{12.3cm}	  
         \begin{liste}
@@ -9,12 +9,12 @@
             Erde oder in Erdnähe (meist bis 18km über Meer)
             \item Geschwindigkeitsberechnung
             \item unlimitierte Teilnehmerzahl (alle gleichzeitig)
-            \item Zeitinformation
+            \item Zeitinformation (UTC)
             \item unabhängig von Wetter und Klima
             \item grosse Sicherheit gegenüber internen und externen (mutwilligen)
             Störungen
-            \item grosse genauigkeit (Position RMS Ziel/heute bei 30/2.5m ; Speed RMS
-            0.3/0.1$\frac{m}{s}$; time RMS 10/30ns)    
+            \item grosse Genauigkeit (Position RMS Ziel/heute bei 30/2.5m ; Speed RMS
+            0.3/0.1$\frac{m}{s}$; time RMS 5-60ns)    
         \end{liste}
 		Bezüglich des RF-Signals:
 		\begin{liste}
@@ -41,6 +41,8 @@
 	               & 1.023\,MHz \\
 	            Data Clock
 	               & 50\,Hz \\
+				Zeitgenauigkeit
+				   & 5-60\,ns \\
 	               
             \hline
         \end{tabular}
@@ -53,11 +55,25 @@
 	Satelliten (SV) berechen. So kann man aus 3 Distanzen die eigene Position
 	berechen. Da jedoch die Userzeit nicht zwingend mit der des SVs
 	überreinstimmt,  braucht man einen zusätztlichen SV.
+
+\subsubsection{Time-of-Fly measurement}
+	\begin{minipage}{14cm}    
+        \includegraphics[width=14cm]{./bilder/gps-timeoffly.png}    
+    \end{minipage}
+	
+	Procedure: \\
+	\begin{enumerate}
+		\item Determine $\Delta t = \Delta t_1 - \Delta t_2$ (can be also negative if the signal of Tx1 arrives before Tx2)
+		\item Calculate the distance to Tx1 $D = \frac{\Delta t\cdot c + A}{2}$
+		\item The distance to Tx2 is given by $d_2 = A-D$
+		
+	\end{enumerate}	
+	
 \subsection{Systemübersicht\formelbuch{183}} 
 
     \begin{minipage}{13cm}
     \subsubsection{Satelliten Konstellation}    
-	    Für eine gleichmässige Abdeckung kreisen die Satteliten in 6 unterschiedlichen
+	    Für eine gleichmässige Abdeckung kreisen die Sateliten in 6 unterschiedlichen
 	    Orbits um die Erde. Diese haben alle eine Höhe von 20`192km, das
 	    heisst, dass die Satelliten 12h pro Umdrehung oder 1d um den gleichen Punkt auf
 	    der Erde erreichen zu haben (Da sich die Erde auch dreht). Die Orbits sind
@@ -71,8 +87,8 @@
 	Die drei Hauptaufgaben des von der USA gestellten Kontrollnetzwerk sind:
 	\begin{liste}
     	\item Überwachung der SV-Bewegungen
-    	\item Überprüfen des SV- clocks
-    	\item Die Zeitsynchrinisation der SV
+    	\item Überprüfen des SV-clocks
+    	\item Die Zeitsynchronisation der SV
     \end{liste} 
 \subsection{Signal Charakteristik\formelbuch{187}}
 	\subsubsection{Übersicht}
@@ -94,10 +110,10 @@
             \end{liste}
 		\end{minipage} 
 	\subsubsection{PRN Sequenz: Gold code}
-		\begin{minipage}{10cm}
+		\begin{minipage}{9.5cm}
         	\includegraphics[width=9cm]{./bilder/GPS-Gold.png}
         \end{minipage}
-		\begin{minipage}{8cm}
+		\begin{minipage}{8.5cm}
         	Jeder SV hat genau eine Sequenz
         	von $2^n-1=2^{10}-1=1023$ Bits. Dadurch wird die PRN Sequenz alle
         	1ms wiederholt. Pro Datenbit hat es genau 20 Sequenzen, dass heisst es
@@ -107,7 +123,11 @@
         	Signal wird der Ausgang des ersten Register mit dem verzögerten
         	Ausgang oder durch EXOR verknüpte Bit des zweiten Register verknüpft.
         	Je nach Verzögerung bzw. EXOR- Verknüpfung kann man auf den Satellit
-        	schliessen.
+        	schliessen. \\
+			These so called spreading codes (signature codes) are used for the identification 
+			of the satellite (CDMA) with the unique signature pattern, as well as for the signal
+			travel time measurement via correlation. Thus resulting in a much smaller peak-power 
+			than sending a short pulse with the same signal energy.
         \end{minipage}
 			
 	\subsubsection{Signalleistung}
@@ -118,11 +138,11 @@
 		$$P_{\text{rx}} = P_\text{sende} + \text{antenna gain} - \text{free space
 		loss} - \text{atmosphere loss} = 43.4 + 13.4 - 184.6 - 2 \approx
 		-130\,\text{dBm}$$\\
-		Die Rauschleistung ist bei einer Bandbreite von ca 2.046MHz:\\
-		$$P_\text{Noise}=-174dB+10\log_{10}(2.046\cdot10^6\text{Hz})\approx110\text{dBm}$$\\
-		Das ergibt ein SNR von ca. -20dB. Durch Korrelation kann jedoch die SNR
-		theoretisch um einen Faktor von $10\log_{10}(2.046\cdot10^6)=63.1\text{dB}$
-		verbessert werden.
+		Die Rauschleistung ist bei einer Bandbreite $B\approx 1$ MHz:\\
+		$$P_\text{Noise}=-174dB+10\log_{10}(B\text{Hz})\approx-114\text{dBm}$$\\
+		Das ergibt ein SNR von ca. -14dB. Durch Korrelation kann jedoch die SNR
+		theoretisch um einen Faktor von $G=10\log_{10}(1023)=30\text{dB}$
+		verbessert werden (sogenanntes Process Gain G).
 	\subsubsection{Korrelation}
 		\begin{minipage}{6cm}
         	\includegraphics[width=6cm]{./bilder/GPS-Autokorrelation.png}
@@ -140,7 +160,7 @@
         	Verwechslung auftreten.
         \end{minipage}
 
-\newpage
+%\newpage
 
 \subsection{Empfänger Architektur\formelbuch{194}}
 	\begin{minipage}{10cm}
@@ -169,33 +189,33 @@
     \end{minipage}\\
 	IF von 47.65MHz; $f_s=38.194$MHz ergibt $IF_{Digital}=47.65-38.194=9.456$MHz
     
-\subsection{GPS und die Relativitätstheorie\formelbuch{202}}
-	\begin{minipage}{10cm}
-    	\includegraphics[height=4.5cm]{./bilder/GPS-Relativitaettheory.png}\\
-    	Lichtuhrversucht für die Spezielle Relativitätstheorie
-    \end{minipage}
-	\begin{minipage}{8cm}
-		\includegraphics[height=5cm]{./bilder/GPS-ZeitKorrektur.png}\\
-		Übersicht der beiden wirkenden Zeitveränderungen
-	\end{minipage}\\ \\
-	Das Licht legt die Strecke d zurück löst einen Impuls aus und wird
-	reflektiert, etc. (\textbf{spezielle Realtivitätstheorie}) \\
-	$v=konst.\Rightarrow$ Zeit des bewegenden Objekts ist langsamer da eine
-	grössere Strecke zurückgelegt werden muss 
-	$ t'_{bew} = \frac{t_{ruh}}{\sqrt{1 - \frac{v^2}{c^2}}}$\\
-	Für einen Satelliten ergibt sich dann:
-	$t_{SV_1}= t_{Erde} \frac 1{\sqrt{1-\frac{g}{c^2}\cdot \frac{R_E^2}R}}$\\
-	Die \textbf{generelle Relativitätstheorie} besagt, dass sich ein Clock
-	langsamer ist, wenn er in einem Gravitationsfeld ist.\\
-	$t_2 = t_0 \frac 1{\sqrt{1-\frac{2GM}{Rc^2}}} 
-  	= t_0 \frac 1{\sqrt{1-\frac{g}{c^2}\cdot 2\frac{R_E^2}R}}$; 
-  	$t_{SV_2}= t_E \frac{\sqrt{1-\frac{g}{c^2}\cdot 2 R_E }}
-    {\sqrt{1-\frac{g}{c^2}\cdot 2\frac{R_E^2}R }}$\\
-    Der totale Effekt ist, dass der Quarz des Satelliten mit nur
-    10.229999995433MHz anstatt den 10.23MHz laufen muss.
-    
-\newpage    
-\subsection{Acquisition\formelbuch{206}}
+%\subsection{GPS und die Relativitätstheorie\formelbuch{202}}
+%	\begin{minipage}{10cm}
+%    	\includegraphics[height=4.5cm]{./bilder/GPS-Relativitaettheory.png}\\
+%    	Lichtuhrversucht für die Spezielle Relativitätstheorie
+%    \end{minipage}
+%	\begin{minipage}{8cm}
+%		\includegraphics[height=5cm]{./bilder/GPS-ZeitKorrektur.png}\\
+%		Übersicht der beiden wirkenden Zeitveränderungen
+%	\end{minipage}\\ \\
+%	Das Licht legt die Strecke d zurück löst einen Impuls aus und wird
+%	reflektiert, etc. (\textbf{spezielle Realtivitätstheorie}) \\
+%	$v=konst.\Rightarrow$ Zeit des bewegenden Objekts ist langsamer da eine
+%	grössere Strecke zurückgelegt werden muss 
+%	$ t'_{bew} = \frac{t_{ruh}}{\sqrt{1 - \frac{v^2}{c^2}}}$\\
+%	Für einen Satelliten ergibt sich dann:
+%	$t_{SV_1}= t_{Erde} \frac 1{\sqrt{1-\frac{g}{c^2}\cdot \frac{R_E^2}R}}$\\
+%	Die \textbf{generelle Relativitätstheorie} besagt, dass sich ein Clock
+%	langsamer ist, wenn er in einem Gravitationsfeld ist.\\
+%	$t_2 = t_0 \frac 1{\sqrt{1-\frac{2GM}{Rc^2}}} 
+%  	= t_0 \frac 1{\sqrt{1-\frac{g}{c^2}\cdot 2\frac{R_E^2}R}}$; 
+%  	$t_{SV_2}= t_E \frac{\sqrt{1-\frac{g}{c^2}\cdot 2 R_E }}
+%    {\sqrt{1-\frac{g}{c^2}\cdot 2\frac{R_E^2}R }}$\\
+%    Der totale Effekt ist, dass der Quarz des Satelliten mit nur
+%    10.229999995433MHz anstatt den 10.23MHz laufen muss.
+%    
+%\newpage    
+\subsection{Acquisition and Tracking\formelbuch{206}}
 
 	\begin{center}
     	\includegraphics[width=14cm]{./bilder/GPS-Phasenlock.jpg}\\
@@ -211,51 +231,64 @@
 	Das ergibt ohne jegliches Vorwissen für jeden Satellit $N=2046\cdot
 	141=288486$ Möglichkeiten.\\
 	Für die Auswertung muss $s=I_P^2+Q_P^2$ gerechnet werden (Korrelation) und eine
-	Peakdedection vorgenommen werden.
-\subsubsection{Chip resolution}
-	\begin{minipage}{10cm}
-	    \includegraphics[width=8cm]{./bilder/GPS-ChipResolution.png}
+	Peakdetection vorgenommen werden.
+	
+	Bei guter Versorgung dauert die Time-To-First-Fix (TTFF) im Minimum 18\,s und im Maximum 36\,s.
+	Das kommt durch den Aufbau der Navigationsnachricht zustande. \\
+	\begin{minipage}{14cm}
+	    \includegraphics[width=14cm]{./bilder/GPS-ttff.png}
     \end{minipage}
-	\begin{minipage}{8cm}
-    	Da die Phase nicht genau bekannt ist, treten bei der Dedektion des
-		Spitztes der Autokorrelation Verluste auf, da nicht mehr das maximum erwischt
-		wird.\\
-		$\text{loss [dB]}= 20 \log_{10}\left(1-\frac{|\Delta
-		t|}{T_{\mathrm{chip}}}\right)$\\
-    \end{minipage}
-\subsubsection{Frequenz resolution}
-	\begin{minipage}{8cm}
-    	\includegraphics[width=6cm]{./bilder/GPS-FrequenzResolution.png}
-    \end{minipage}
-	\begin{minipage}{10cm}
-	    Bei einem unbekannten Doppler Shift und einer unbekannten Frequenzabweichung
-		treten in der Integration Verluste auf.\\
-		$\text{loss [dB]}= 20 \log_{10} \frac{\sin(\pi f_{\mathrm{offset}}T)} {\pi
-		f_{\mathrm{offset}}T}$\\
-     	Grafik links zeigt den Verlust nach der Integration von einer Sequenz
-     	(1ms).
-    \end{minipage}
-\subsubsection{AD conversion with N-bit resolution \formelbuch{210}}
-	Die Verluste eines 1-Bit Quantisierer beträgt ca. 2dB. Die eines 1Bit NCO ca.
-	1dB.
-\subsection{Tracking\formelbuch{212}}
-	Siehe Bild Acquisition\\
+	
+	Mit Hilfe von Assisted GPS (A-GPS) kann die TTFF drastisch verkleinert werden (auf ca. 1-3\,s). Beim A-GPS werden die 
+	Ephemeris Daten auf einem Referenz Location Server gespeichert und in sehr schnellen Zyklen gebroadcastet (z.B. via GPRS/UMTS). \\
+	
+	\textbf{Note:} The Ephemeris data, which is sent every 30s, contains the highly accurate orbital position of the 
+	current received satellite, while the Almanac data, which is spread over the 12.5 min of the Navigation message, 
+	contains the less accurate orbital position of the other satellites.
+	
+%\subsubsection{Chip resolution}
+%	\begin{minipage}{10cm}
+%	    \includegraphics[width=8cm]{./bilder/GPS-ChipResolution.png}
+%    \end{minipage}
+%	\begin{minipage}{8cm}
+%    	Da die Phase nicht genau bekannt ist, treten bei der Detektion des
+%		Spitzes der Autokorrelation Verluste auf, da nicht mehr das Maximum erwischt
+%		wird.\\
+%		$\text{loss [dB]}= 20 \log_{10}\left(1-\frac{|\Delta
+%		t|}{T_{\mathrm{chip}}}\right)$\\
+%    \end{minipage}
+%\subsubsection{Frequenz resolution}
+%	\begin{minipage}{8cm}
+%    	\includegraphics[width=6cm]{./bilder/GPS-FrequenzResolution.png}
+%    \end{minipage}
+%	\begin{minipage}{10cm}
+%	    Bei einem unbekannten Doppler Shift und einer unbekannten Frequenzabweichung
+%		treten in der Integration Verluste auf.\\
+%		$\text{loss [dB]}= 20 \log_{10} \frac{\sin(\pi f_{\mathrm{offset}}T)} {\pi
+%		f_{\mathrm{offset}}T}$\\
+%     	Grafik links zeigt den Verlust nach der Integration von einer Sequenz
+%     	(1ms).
+%    \end{minipage}
+%\subsubsection{AD conversion with N-bit resolution \formelbuch{210}}
+%	Die Verluste eines 1-Bit Quantisierer beträgt ca. 2dB. Die eines 1Bit NCO ca.
+%	1dB.
+
 \subsection{Leistungsfähigkeit und Interferenzen\formelbuch{214}}
 	Die Genauigkeit der Positionsmessung wird von folgenden Parameter beeinflusst:
 	\begin{liste}
-    	\item globale Position (über den polen hat es eine schlechte
+    	\item globale Position (über den Polen hat es eine schlechte
     	Satellitenabdeckung)
     	\item lokale Position (grosse Gebäude in der Nähe, im Thal, etc nur wenige
-    	SV sind in sicht)
-    	\item schnelle Bewegung des Users (wenn schwache Signale sind lange
+    	SV sind in Sicht)
+    	\item schnelle Bewegung des Users (bei schwachen Signalen sind lange
     	Korrelationen nötig, welche mit den Bewegungen schwieriger werden)
     	\item Komplexitität des Empfängers (Preis/Qualität)
     	\item Andere Einflüsse (zB. Störsender \formelbuch{216})
     	\item Reduktion der Ephemeridenauflösung (5m)
     	\item Brechung der Tropo-/Ionosphäre (siehe\formelbuch{215})
-    	\item Mehrpfadfortpflanzung (Problem von Indoor anwendungen da Reflecionen
+    	\item Mehrpfadfortpflanzung (Problem von Indoor-Anwendungen da Reflektionen
     	etc.)
-    	\item schlechte Geometry von Satelliten
+    	\item schlechte Geometrie von Satelliten
     \end{liste}
 
 \subsection{Dopplereffekt \formelbuch{217}}
@@ -348,20 +381,47 @@
 % 	}}
 % 	\end{center}
 
-\subsection{Genauigkeitsangaben}
-\begin{tabular}{|l|l|}
-	\hline
-	\textbf{Bezeichnung} & \textbf{Beschreibung}\\
-	\hline
-	\hline
-	CEP & Radius des Kreises der 50\% aller Messungen beinhaltet\\
-	\hline
-	R95 & Radius des Kreises der 95\% aller Messungen beinhaltet R95
-	= 2 CEP\\
-	\hline
-	R989 & Radius des Kreises der 98.9\% aller Messungen beinhaltet R989
-	= 2.55 CEP\\
-	\hline
-\end{tabular}
-\subsection{GLONASS\formelbuch{224}}
-\subsection{Galileo\formelbuch{225}}
+\subsection{Distance calculation}
+	
+	\begin{tabular}{ll}
+		\parbox{11cm}{
+			To determine the distance between the GPS-receivers position and the position with the same 
+			latitude on the Greenwich-null-meridian, the following formula can be used 
+			(Latitude $\varphi$ and longitude $\lambda$ are given by the GPS-receiver):\\
+			Distance $D = \lambda \text{[min]} \cdot 1.852 \text{km} \cdot cos(\frac{\pi}{180}\cdot \varphi \text{[deg]}) $ \\
+			
+			\textbf{Example:}
+			Latitude $\varphi = 47^\circ$ 17.115 min and longitude $\lambda = 8^\circ$ 33.912 min \\
+			$D = (8\cdot 60 + 33.912) \text{[min]} \cdot 1.852 \text{km} \cdot cos(\frac{\pi}{180}\cdot (47 + 17.115/60) \text{[deg]}) = 645.6$km
+		}	
+		& \parbox{7cm}{
+			\includegraphics[width=7cm]{./bilder/gps-distance.png}\\ 
+		}
+	\end{tabular}
+
+%\subsection{Genauigkeitsangaben}
+%\begin{tabular}{|l|l|}
+%	\hline
+%	\textbf{Bezeichnung} & \textbf{Beschreibung}\\
+%	\hline
+%	\hline
+%	CEP & Radius des Kreises der 50\% aller Messungen beinhaltet\\
+%	\hline
+%	R95 & Radius des Kreises der 95\% aller Messungen beinhaltet R95
+%	= 2 CEP\\
+%	\hline
+%	R989 & Radius des Kreises der 98.9\% aller Messungen beinhaltet R989
+%	= 2.55 CEP\\
+%	\hline
+%\end{tabular}
+
+\subsection{Other Global Navigation Satellite Systems}
+\textbf{GLONASS} \\
+	GLONASS is a Russian Global Navigation Satellite System that works similar to the NAVSTAR-GPS \\
+\textbf{Galileo} \\
+	Galileo is a new European Global Navigation Satellite System using Binary Offset Coding (BOC) instead of the Binary Phase Shift Keying (BPSK) 
+	used by NAVSTAR-GPS. Today's GPS receiver are already equipped with the required technology to work with Galileo. It's only a 
+	different modulation type (software modification sufficient). \\
+\textbf{Beidou/Compass} \\
+	Beidou is a Chinese Global Navigation Satellite System.
+	

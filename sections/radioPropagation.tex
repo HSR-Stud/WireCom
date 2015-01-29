@@ -11,19 +11,20 @@
 	Equivalent Isotropic Radiated Power &                               $EIRP = P_t \cdot G_t$                               \\ \hline
 	Rx Power                            &   $P_r(d) = \frac{P_t \cdot G_t \cdot G_r \cdot \lambda^2}{(4\pi)^2 \cdot d^2}$    \\ 
 	                                    & $P_r[dBm] = P_t[dBm] + G_t[dBi] + G_r[dBi] - PL_{path}[dB]$ \\ \hline
-	Path Loss (Free Space) & $PL_{path}[db] = 10\cdot log_{10}((\frac{4\pi d}{\lambda})^2)$  \\ 
-	                                    & $PL_{path}[db] = 32.4\;dB + 20 \cdot log_{10}(f[MHz]) + 20 \cdot log_{10}(d[km])$ \\ \hline
+	Path Loss (Free Space) 				& $PL_{path}[db] = 10\cdot log_{10}((\frac{4\pi d}{\lambda})^2) = 10\cdot log_{10}((\frac{4\pi d\cdot f}{c})^2)$  \\ 
+	                                    & $PL_{path}[db] = 32.4\;dB + 20 \cdot log_{10}(f[MHz]) + 20 \cdot log_{10}(d[km])$ \\
+										& $D_{max}[m] \leq \sqrt{10^{\frac{PL_{path}[db]}{10}}}\cdot \frac{c}{4\pi f}$ 		\\ \hline
 \end{tabular} 
 
 \subsection{Path Loss Model 'Exponent n'}
 
-\begin{equation*}
+\begin{equation}
 	PL_{path}(d) = \underbrace{PL_{fs}(d_0)}_{\textbf{Free space Loss @ $d_0$}} + 10 \cdot n \cdot log_{10}(\frac{d [m]}{d_0 [m]})
-\end{equation*}
+\end{equation}
 
-\begin{equation*}
+\begin{equation}
 	PL_{fs}(d_0) = 10\cdot log_{10}((\frac{4\pi d_0}{\lambda})^2)
-\end{equation*}
+\end{equation}
 
 \begin{table}[!htp]
 \begin{subtable}[c]{0.6\textwidth}
@@ -63,17 +64,17 @@ The Hata model for mobile radio is valid under the following constraints:\\ \\
 \end{tabular} \\ \\
 
 General Form:
-\begin{equation*}
+\begin{equation}
 	PL_{50}[dB] = A + 10 \cdot n \cdot log_{10}(d[km])
-\end{equation*}
+\end{equation}
 
 Median value of the attenuation:
-\begin{equation*}
+\begin{equation}
 	PL_{50}[dB] = \underbrace{ 46.3  33.9 \cdot log(f_c [MHz]) - 13.82 \cot log_{10}(h_t [m]) -a(h_r  [m])}_{A} +  \underbrace{(44.9 -6.55 \cdot log_{10}(h_t [m]))}_{10 \cdot n} \cdot log_{10}(d [km]))
-\end{equation*}
-\begin{equation*}
+\end{equation}
+\begin{equation}
 	a(h_r) = (1.1 \cdot log_{10}(f_c) - 0.7) \cdot h_r- (1.56 \cdot log_{f_c} - 0.8)
-\end{equation*}
+\end{equation}
 
 \textbf{If height of the tx antenna $h_t = 30\;m$ then is $n=3.5$. The result rate is then $\frac{35\;dB}{Dekade}$}
 
@@ -91,21 +92,21 @@ The Okumura Hata model for mobile radio is valid under the following constraints
 \end{tabular} \\ \\
 
 Urban Path Loss:
-\begin{equation*}
+\begin{equation}
 	PL_{50,Urban}[dB] =  69.55 + 26.16 \cdot log_{10}(f [MHz])- 13.82 \cdot log_{10}(h_t [m]) - C+ (44.9 -6.55 \cdot log_{10}(h_t[m])) \cdot log_{10}(d[km]))
-\end{equation*}
+\end{equation}
 
 Correction factor C:\\ \\
 \begin{tabular}{ll}
-medium/small cities: & $C = (1.1 \cdot log_{10}(f [MHz])-0.7) \cdot h_r -1.56 \cdot log_{10}(f [MHz]) + 0.8 \quad \approx 0 \text{ if } h_r = 1.5m$ \\ 
+medium/small cities: & $C = (1.1 \cdot log_{10}(f [MHz])-0.7) \cdot h_r -1.56 \cdot log_{10}(f [MHz]) + 0.8 \quad \text{ ~ } 0 \text{ if } h_r = 1.5m$ \\ 
 suburban: & $C = 2 \cdot (log_{10}(\frac{f[MHz]}{28}))^2 + 5.4$ \\ 
 \end{tabular} 
 
 \subsection{Link Budget}
 Received Power:
-\begin{equation*}
-	P_r [dBm] = \underbrace{P_t [dBm] - L_t [dBm] + G_t[dBi]}_{\text{EIRP [dB]}} - PL_{path}[dB] + G_r[dBi] -L_r[dB]
-\end{equation*}
+\begin{equation}
+	P_r [dBm] = \underbrace{P_t [dBm] - L_t [dBm] + G_t[dBi]}_{ \text{EIRP [dB]} } - PL_{path}[dB] + G_r[dBi] -L_r[dB]
+\end{equation}
 
 \begin{tabular}{ll}
 \textbf{Parameter} & \textbf{acceptation} \\ \hline
@@ -115,9 +116,10 @@ $EIRP$ & often limited by regulation \\
 \end{tabular} \\ \\
 
 Minimum required Rx Power
-\begin{equation*}
-	P_r [dBm] \geq \underbrace{-174[dBm]}_{\text{nois floor}} + 10 \cdot log_{10}(B [Hz]) + \underbrace{F_{tot}[dB]}_{\text{Rx noise figure}} + SNR_{min} + Margin_{\text{Fading}}
-\end{equation*}
+\begin{equation}
+	P_r [dBm] \geq \underbrace{-174[dBm]}_{ \text{noise floor} } + 10 \cdot log_{10}(\underbrace{B [Hz]}_{\text{bandwidth} }) + 
+	\underbrace{F_{tot}[dB]}_{ \text{Rx noise figure} } + SNR_{min} + Margin_{ \text{Fading} }
+\end{equation}
 
 \subsection{Das zelluläre Konzept \formelbuch{235}}
 	\begin{minipage}{12cm}
@@ -126,8 +128,8 @@ Minimum required Rx Power
 		Die Anzahl Zellen pro Cluster $N$ ist durch folgende Formel beschränkt:
 		\begin{center}
 	        $ N=i^2+j^2+ij = \left\{1,3,4,7,9,12,13,16,19,\ldots\right\}, \quad \text{mit } i,j \in
-	        \{0,1,2,3,\ldots \} $ \\ $ D = \sqrt{3N} R \qquad q = \frac{D}{R} =
-	        \sqrt{3N} $
+	        \{0,1,2,3,\ldots \} $ \\ Frequenzwiederholabstand $ D = \sqrt{3N} R = (6\cdot 10^{(\frac{C/I[dB]}{10})})^{1/4} R$ \\ Normierter Frequenzwiederholabstand $q = \frac{D}{R} =
+	        \sqrt{3N}$ \\ Clustergrösse $N \geq \frac{q^2}{3}$
         \end{center}
 	\end{minipage}
 	\begin{minipage}{8cm}
