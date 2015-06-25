@@ -1,1 +1,78 @@
 \section{Bluetooth LE/Smart}
+	\begin{tabular}{ll}
+		\parbox{10cm}{
+			\begin{itemize}
+				\item Brand new protocol stack compared to BR/EDR
+				\item Target: Ultra low power application which runs with coin cell battery
+				\item Works with 40 channels of 2 MHz in the 2.4 GHz band
+				\item GFSK Modulation (Gaussian Frequency Shift Keying)
+				\item Bitrate of 1 Mb/s on the air interface (0.2 Mb/s application data rate)
+				\item client server architecture
+				\item Only star networks possible
+				\item Uses advertising events on 3 channels to broadcast data without established connection (no hopping, using 3 channels in sequence)
+				\item Data exchange with frequency hopping on 37 data channels when connection established
+				\item Inquiry time: 20ms - 10s (due to advertisement interval)
+				\item Connecting time: $\leq 3$ms after advertisement
+				\item Radio range 10-20m indoor, somewhat larger than BT-BR/EDR (power class 2) due to more sensitive receiver
+				\item Peak current consumption $\leq 15$mA to run on coin cell battery
+				\item Power consumption 1-50\% of Bluetooth BR/EDR, depending on use case
+				\item BLE is not voice capable
+			\end{itemize}
+
+		}	
+		& \parbox{8cm}{
+			\fbox{ \includegraphics[width=8cm]{./bilder/ble-channels.png}} \\ BLE advertising and data channels }
+	\end{tabular}
+	
+	\subsection{Topology}
+		\begin{tabular}{ll}
+			\parbox{9cm}{
+				\fbox{ \includegraphics[width=8cm]{./bilder/ble-topology.png}} \\ BLE Topology 
+			}	
+			& \parbox{9cm}{
+				Maximum 4 slaves are available at the moment on the market. However, the BLE standard doesn't define a maximum number of slaves.
+				
+				Compared to BT-BR/EDR the master is communicating on different frequencies with the slaves.
+				With BLE it is not possible to have scatternet anymore.
+			}	
+		\end{tabular}
+		
+	\subsection{Message Sequence Chart}
+		\begin{tabular}{ll}
+			\parbox{11cm}{
+				This is an example for a Message Sequence Chart between a Bluetooth LE advertiser and a Bluetooth LE initiator, assuming that 
+				\begin{itemize}
+					\item the advertising interval is 1s (and the random advertising delay can be neglected)  
+					\item the host of the initiator requests a connection at $t = 1.5$s with a connection interval of 1s  
+					\item the (adaptive) data channel hop sequence is 15, 32, 24, 17, 10, 5, 6, 11, 19, ...  
+					\item the first connection event starts 1s after the last advertising event started  
+					\item the slave latency is 3 (the slave answers to the first connection packet)  
+					\item master and slave send data packets with empty PDU if required and no data is available   
+					\item the host of the slave requests to send a notification with a newvalue at $t = 7.5$s 
+				\end{itemize}
+			}
+			& \parbox{7cm}{
+				\fbox{ \includegraphics[width=7cm]{./bilder/ble-msc.png}}
+			}	
+		\end{tabular}
+			
+	\subsection{Scanning}
+		\begin{tabular}{ll}
+			\parbox{9cm}{
+				The \textbf{scanner} is listening for advertising channel packets from devices that are advertising. A passive 
+				scanner is only listening, while an active scanner may request an advertiser to send additional information. \\
+				
+				\textbf{Advertising Channel PDU types} \\
+				\begin{tabular}{|l|c|c|} \hline 
+					\textbf{Advertising event type} & \textbf{SCAN} & \textbf{CONNECT} \\ \hline \hline
+					& \multicolumn{2}{|c|}{allowed}  \\ \hline
+					ADV-IND & YES & YES \\ \hline 
+					ADV-DIRECT-IND & NO & YES \\ \hline 
+					ADV-NONCONN-IND & NO & NO \\ \hline 
+					ADV-SCAN-IND & YES & NO \\ \hline 	
+				\end{tabular} }
+			& \parbox{9cm}{
+				\fbox{ \includegraphics[width=9cm]{./bilder/ble-scanning.png}}
+			}
+		\end{tabular}	
+			
